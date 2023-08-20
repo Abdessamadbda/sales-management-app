@@ -1,0 +1,38 @@
+  <app-nav-bar *ngIf="isHomeSpace()|| isAdminSpace() || isSellerSpace()" ></app-nav-bar>
+  <app-nav-bar1 *ngIf="isSellerProfileSpace()"></app-nav-bar1>
+  <app-nav-bar1 *ngIf="isDeclarationSpace()"></app-nav-bar1>
+  <app-nav-bar1 *ngIf="isUpdateSpace()"></app-nav-bar1>
+  <app-nav-bar1 *ngIf="isSstatesSpace()"></app-nav-bar1>
+  <app-nav-bar1 *ngIf="isSelectSellerSpace()"></app-nav-bar1>
+
+  <app-nav-bar2 *ngIf="isAdminProfileSpace()"></app-nav-bar2>
+  <app-nav-bar2 *ngIf="isStatesSpace()"></app-nav-bar2>
+  <app-nav-bar2 *ngIf="isNewsellerSpace()"></app-nav-bar2>
+  <app-nav-bar2 *ngIf="isSellersSpace()"></app-nav-bar2>
+
+  <div *ngIf="isHomeSpace()"  id="particles-js">
+    <div class="component-wrapper">
+        <router-outlet></router-outlet>
+    </div>
+  </div>
+  <app-hero-section *ngIf="isHomeSpace()"></app-hero-section>
+  <app-footer *ngIf="isHomeSpace()"></app-footer>
+  <app-login *ngIf="isSellerSpace()"></app-login>
+  <app-profile1 *ngIf="isSellerProfileSpace()"></app-profile1>
+  <app-alogin *ngIf="isAdminSpace()"></app-alogin>
+  <app-aprofile1 *ngIf="isAdminProfileSpace()"></app-aprofile1>
+  <app-states *ngIf="isStatesSpace()"></app-states>
+  <app-newseller *ngIf="isNewsellerSpace()"></app-newseller>
+  <app-declaration *ngIf="isDeclarationSpace()"></app-declaration>
+  <app-sellers *ngIf="isSellersSpace()"></app-sellers>
+  <app-update *ngIf="isUpdateSpace()"></app-update>
+  <app-sstates *ngIf="isSstatesSpace()"></app-sstates>
+  <app-selectSeller *ngIf="isSelectSellerSpace()"></app-selectSeller>
+
+
+
+
+
+
+
+

@@ -1,0 +1,53 @@
+h1{
+    margin-top: 5rem;
+text-align: center;
+}
+.div1{
+    height: 17rem;
+    width: 20rem;
+    border: 1px solid;
+    margin-left: 20rem;
+    margin-top: 6rem;
+    border-radius: 3rem;
+    box-shadow: 10px 5px 5px grey;;
+
+}
+.div2{
+    height: 17rem;
+    width: 20rem;
+    border: 1px solid;
+    margin-left: 7rem;
+    margin-top: 6rem;
+    border-radius: 3rem;
+    box-shadow: 10px 5px 5px grey;;
+    justify-content: center;
+
+
+}
+.div1:hover, .div2:hover {
+    width: 21rem;
+    height: 17rem;
+    cursor: pointer;
+  }
+  
+.newseller{
+    height: 16rem;
+    width: 20rem;
+    border-radius: 3rem 3rem 0rem 0rem;
+}
+.p1{
+    font-family:fantasy;
+   
+
+}
+.div1 img, .div2 img {
+    width: 100%;
+    height: auto;
+  }
+
+  .div1 p, .div2 p {    
+    width: 100%;
+    color:black;
+    text-align: center;
+    transition: opacity 0.3s;
+  }

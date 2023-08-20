@@ -1,0 +1,54 @@
+<div >
+    <p id="Title">Déclarer votre nouveau vendeur</p>
+    <form (submit)="handleSubmit()">
+    <div size="lg" >
+        <label>Nom & Prénom</label>
+        <input style="width:28rem;height:2rem" name="nom_complet" [(ngModel)]="model.nom_complet"/>
+    </div>
+    <br />
+    <div size="lg" >
+        <label>Ville</label>
+        <select value={ville} [(ngModel)]="model.ville" style="width:28.5rem;height:2.5rem"  name="ville" >
+        <option value=""></option>
+            <option value="Inezgane">Inezgane</option>
+            <option value="Tantan">Tantan</option>
+            <option value="Casablanca">Casablanca</option>
+        </select>
+    </div>
+    <br />
+    <div size="lg" >
+      <label>Téléphone</label>
+      <input style="width:28rem;height:2rem" name="phone" [(ngModel)]="model.phone"/>
+  </div>
+  <br/>
+      <div size="lg" controlId="email">
+        <label>Nom d'utilisateur</label>
+
+        <input style="width:28rem;height:2rem"  autoFocus type=""  name="username" [(ngModel)]="model.username"/>
+      </div>
+      <br />
+      <div size="lg" controlId="password">
+        <label>Password</label>
+        <input style="width: 28rem; height: 2rem" type="{{ showPassword ? 'text' : 'password' }}" name="password" [(ngModel)]="model.password" />
+      </div>
+      <br/>
+      <div style="display:flex;">
+      <input type="checkbox" (change)="show()"/>
+      <label style="margin-left: 5px;margin-top: 6px;">Show Password</label>
+    </div>
+
+      <br/>
+      <button style="background-color:'green';width:28.5rem;height:2.5rem" block  type="submit"  value="SEND" (click)="scrollToBottom()"> Envoyer </button>
+      <div *ngIf="formSubmitted" class="feedback success"><span class="checkmark">&#10003;</span>
+        &nbsp;&nbsp;Données enregistrées 
+      </div>
+    
+      <div *ngIf="!isValid() && !formSubmitted" class="feedback info">
+        Veuillez remplir tous les champs 
+      </div>
+      <div *ngIf="formNonSubmitted" class="feedback error"><span class="cross">&#10005;</span>
+        &nbsp;&nbsp;Données non enregistrées 
+      </div>
+   </form>
+   <br />
+   </div>

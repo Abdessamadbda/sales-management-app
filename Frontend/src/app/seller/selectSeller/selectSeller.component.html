@@ -1,0 +1,10 @@
+<h1 style="text-align: center;margin-top: 4rem;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Sélectionner un vendeur</h1>
+<div style="display: flex; flex-wrap: wrap;">
+  <ng-container *ngFor="let user of usersData; let i = index;">
+    <div class="div2" (click)="divClicked(user)">
+      <img style="width: 12rem; height: 12rem; margin-left: 2.55rem; margin-top: 0.5rem;" src="../../assets/images/profile.png">
+      <p class="p1">{{ user.nom_complet }}</p>
+    </div>
+    <ng-container *ngIf="(i + 1) % 3 === 0 || i === usersData.length - 1"></ng-container>
+  </ng-container>
+</div>

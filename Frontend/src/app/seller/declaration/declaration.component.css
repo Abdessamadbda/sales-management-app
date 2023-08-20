@@ -1,0 +1,78 @@
+button {
+    width: 100%; 
+    padding: 10px; 
+    background-color: #f1b362; 
+    color: #fff; 
+    border: none; 
+    cursor: pointer; 
+    margin-top: 10px;
+  }
+  
+  
+   button:hover {
+    background-color: #7c7b77; 
+    
+  }
+
+  form {
+    width: 400px; 
+    margin-left:  7rem ; 
+    margin-top: 5rem;
+  }
+  .div0{
+  margin-left: 17rem;
+  margin-top: 10rem;
+  }
+  .bt1{
+border-radius: 2rem;
+border:2px solid #f3c546;
+color:#f3c546;
+background-color: #fff;
+  }
+  .bt2{
+    border-radius: 2rem;
+    border:2px solid #f3aa23;
+    color:#f3aa23;
+background-color: #fff;
+
+    margin-top: 1rem;
+      }
+      .bt1:hover {
+        background-color: #f3cf82; 
+        border: 0px;
+        color: black;
+      }
+      .bt2:hover {
+        background-color: #f3cf82; 
+        border: 0px;
+        color: black;
+      }
+  label {
+    display: block; 
+    margin-bottom: 5px; 
+  }
+  .feedback {
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    display: inline-block;
+    padding: 5px;
+    border-radius: 5px;
+    width: fit-content;
+  }
+  
+  .success {
+    color: green;
+  }
+  
+  .error {
+    color: red;
+  }
+  .info {
+    color: rgb(219, 120, 7);
+  }
+  
+  .checkmark,
+  .cross {
+    margin-left: 5px;
+  }

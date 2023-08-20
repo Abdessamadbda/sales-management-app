@@ -1,0 +1,55 @@
+<div class="container">
+  <div class="filters">
+    <h2>Filtrer par:</h2>
+    <label for="monthSelect">Mois:</label>
+    <select id="monthSelect" [(ngModel)]="selectedMonth">
+      <option value="1">Janvier</option>
+      <option value="2">Février</option>
+      <option value="3">Mars</option>
+      <option value="4">Avril</option>
+      <option value="5">Mai</option>
+      <option value="6">Juin</option>
+      <option value="7">Juillet</option>
+      <option value="8">Août</option>
+      <option value="9">Septembre</option>
+      <option value="10">Octobre</option>
+      <option value="11">Novembre</option>
+      <option value="12">Décembre</option>
+    </select>
+
+    <label for="yearSelect">Année:</label>
+    <input id="yearSelect" [(ngModel)]="selectedYear">
+<div >
+    <button style="display:block; margin-top: 1rem; margin-left: 5.4rem;border-radius: 5px;" (click)="filterByMonthAndYear(selectedMonth, selectedYear)">Appliquer le filtre</button>
+    <button style="display:block;margin-left: 7rem;border-radius: 5px;background-color:#fab75f;" (click)="clearFilters()">Vider le filtre</button>
+  </div>
+  </div>
+
+  <div class="reports">
+    <div class="search">
+      <div class="searchContainer">
+        <input type="text" class="searchInput" [(ngModel)]="searchQuery" (keyup)="applyFilter()" placeholder="Rechercher">
+        <img class="searchIcon" src="../../../assets/images/search.png">
+      </div>
+            <button class="searchbutton" (click)="clearSearch()">Effacer</button>
+    </div>
+    <div style="margin-top: 3rem;">
+    <h1>Etats de ventes</h1>
+    <table>
+      <thead>
+        <tr>
+          <th class="th1">Nom du fichier</th>
+          <th class="th2">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let report of filteredReports">
+          <td class="th1">{{ report.fileName }}</td>
+          <td class="th2"><button (click)="downloadReport(extractDateFromFileName(report.fileName))">Télécharger</button></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+  
+</div>

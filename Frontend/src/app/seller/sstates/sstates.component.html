@@ -1,0 +1,18 @@
+<table style="margin-left: 7rem;margin-top: 5rem;">
+  <thead>
+    <tr>
+      <th style="padding-right: 7rem;padding-top: 10px;">Etat de vente</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <br>
+
+    <tr *ngFor="let report of salesReports">
+      <td style="padding-right: 7rem;padding-top: 10px;">{{ report.fileName }}</td>
+      <td>
+        <button (click)="downloadReport(extractDateFromFileName(report.fileName))">Télécharger</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

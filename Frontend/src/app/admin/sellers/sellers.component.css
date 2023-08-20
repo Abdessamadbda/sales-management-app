@@ -1,0 +1,48 @@
+.div1{
+    height: 15rem;
+    width: 17rem;
+    border: 1px solid;
+    margin-left: 20rem;
+    margin-top: 6rem;
+    border-radius: 3rem;
+
+}
+.div2{
+    height: 15rem;
+    width: 17rem;
+    border: 1px solid;
+    margin-left: 8rem;
+    margin-top: 4rem;
+    border-radius: 3rem;
+    align-items: center;
+    margin-bottom: 1rem;
+
+}
+.div1:hover, .div2:hover {
+    box-shadow:   0.5px 0.5px 0.5px 4px rgb(247, 165, 98);;
+
+    cursor: pointer;
+  }
+  
+.newseller{
+    height: 2px;
+    width: 2px;
+    border-radius: 3rem 3rem 0rem 0rem;
+}
+.p1{
+    margin-top: -0.2rem;
+    justify-content: center;
+    margin-left: 4rem;
+    font-family:fantasy;
+}
+.div1 img, .div2 img {
+    width: 100%;
+    height: auto;
+  }
+
+  .div1 p, .div2 p {    
+    width: 100%;
+    color:black;
+    margin-left: 4rem;
+    transition: opacity 0.3s;
+  }

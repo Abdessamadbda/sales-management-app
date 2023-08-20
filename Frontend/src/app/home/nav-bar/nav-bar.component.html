@@ -1,0 +1,26 @@
+    <head>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sansita">
+      </head> 
+      <head>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Courgette">
+      </head> 
+<nav class="navbar">
+    <div class="navbar-container">
+      <a routerLink="/" [class.active]="activeLink === 'link1'" class="navbar-logo" (click)="handleLinkClick('link1')">
+        3fcom
+        <i class="fa fa-book" aria-hidden="true"></i>
+      </a>
+  
+      <ul class="nav-menu">
+        <li class="nav-item">
+          <a routerLink="/" class="nav-link" [class.active]="activeLink === 'link1'" (click)="handleLinkClick('link1')">Accueil</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/seller/login" class="nav-link" [class.active]="activeLink === 'link2'" (click)="handleLinkClick('link2')">Espace Vendeur</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/admin/alogin" class="nav-link" [class.active]="activeLink === 'link3'" (click)="handleLinkClick('link3')">Espace Administrateur</a>
+        </li>
+      </ul>
+    </div>
+  </nav>

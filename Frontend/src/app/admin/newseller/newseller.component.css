@@ -1,0 +1,60 @@
+form {
+    width: 400px; 
+    margin: 0 auto; 
+    margin-top: 5rem;
+  }
+  
+  label {
+    display: block; 
+    margin-bottom: 5px; 
+  }
+  
+ 
+  #Title{
+    text-align:center; 
+    margin-left: 2rem;
+    vertical-align: middle;
+    margin-top: 4rem;
+    font-size: 30px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  button {
+    width: 100%; 
+    padding: 10px; 
+    background-color: #f1b362; 
+    color: #fff; 
+    border: none; 
+    cursor: pointer; 
+    margin-top: 10px;
+  }
+  
+  
+   button:hover {
+    background-color: #747c85; 
+  }
+  .feedback {
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    display: inline-block;
+    padding: 5px;
+    border-radius: 5px;
+    width: fit-content;
+  }
+  
+  .success {
+    color: green;
+  }
+  
+  .error {
+    color: red;
+  }
+  .info {
+    color: rgb(219, 120, 7);
+  }
+  
+  .checkmark,
+  .cross {
+    margin-left: 5px;
+  }
+  

@@ -1,0 +1,14 @@
+/* You can add global styles to this file, and also import other style files */
+::-webkit-scrollbar {
+    width: 10px; /* Set the width of the scrollbar */
+  }
+
+  /* Target the scrollbar thumb */
+  ::-webkit-scrollbar-thumb {
+    background-color: #f8a353; /* Set the color of the scrollbar thumb */
+    border-radius: 5px; /* Set the border radius of the scrollbar thumb */
+  }
+
+  /* Target the scrollbar track for Firefox */
+  /* Note: Firefox currently supports scrollbar customization with a different syntax */
+ 

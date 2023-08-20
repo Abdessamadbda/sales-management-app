@@ -1,0 +1,21 @@
+<div class="Login">
+    <p class="Title">Connexion</p>
+    <form (ngSubmit)="loginUser()" method="post">
+      <div size="lg" controlId="email">
+        <label for="username">Nom d'utilisateur</label>
+        <input placeholder="Nom d'utilisateur" id="username" type="text"  name="username"  [(ngModel)] = "model.username" required />
+      </div>
+  
+      <div size="lg" controlId="password">
+        <label for="password">Password</label>
+        <input placeholder="Password" type="password" id="password" name="password"  [(ngModel)] = "model.password" required />
+      </div>
+  
+      <button type="submit" >Se connecter</button>
+      <br/>
+      <div *ngIf="login" class="feedback error"><span class="cross">&#10005;</span>
+        &nbsp;&nbsp;Données invalides
+      </div>
+    </form>
+  </div>
+  

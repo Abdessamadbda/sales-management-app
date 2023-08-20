@@ -1,0 +1,17 @@
+button{
+    width: 5rem; 
+    padding: 4px; 
+    background-color: #f1b362; 
+    color: #fff; 
+    border: none; 
+    cursor: pointer; 
+    margin-top: 10px;
+    border-radius: 10px;
+}
+.sale-item{
+    border: 1px solid black;
+    padding: 7px;
+    width:90%;
+    border-radius: 1rem;
+    
+}

@@ -1,44 +1,63 @@
 <div >
     <p id="Title">Déclarer votre nouveau vendeur</p>
     <form (submit)="handleSubmit()">
+      <div style="display:flex;">
     <div size="lg" >
         <label>Nom & Prénom</label>
-        <input style="width:28rem;height:2rem" name="nom_complet" [(ngModel)]="model.nom_complet"/>
+        <input style="width:130%;" [(ngModel)]="model.nom_complet"/>
     </div>
     <br />
-    <div size="lg" >
+    <div size="lg" style="margin-left: 4rem;">
         <label>Ville</label>
-        <select value={ville} [(ngModel)]="model.ville" style="width:28.5rem;height:2.5rem"  name="ville" >
+        <select value={ville} [(ngModel)]="model.ville" style="width:167%;height:2.5rem;"  name="ville" >
         <option value=""></option>
+        <option value="Agadir">Agadir</option>
             <option value="Inezgane">Inezgane</option>
             <option value="Tantan">Tantan</option>
             <option value="Casablanca">Casablanca</option>
+            <option value="Rahma">Rahma</option>
         </select>
     </div>
+  </div>
+    <br />
+    <div size="lg" >
+      <label>Code agence</label>
+      <select value={agence} [(ngModel)]="model.agence" style="width:100%;height:2.5rem"  name="agence" >
+      <option value=""></option>
+          <option value="POS11580">POS11580</option>
+          <option value="POS15509">POS15509</option>
+          <option value="POS126372">POS126372</option>
+          <option value="POS306 RAI">POS306 RAI</option>
+          <option value="POS550 RAHMA">POS550 RAHMA</option>
+      </select>
+  </div>
     <br />
     <div size="lg" >
       <label>Téléphone</label>
-      <input style="width:28rem;height:2rem" name="phone" [(ngModel)]="model.phone"/>
+      <input name="phone" [(ngModel)]="model.phone" (keydown)="validateNumericInput($event)"/>
+      <div *ngIf="showNumericValidationMessage" class="validation-message">entrée invalide.</div>
+      <div *ngIf="showLengthValidationMessage" class="validation-message1"> Vous avez entré 10 chiffres</div>
+
   </div>
   <br/>
       <div size="lg" controlId="email">
         <label>Nom d'utilisateur</label>
 
-        <input style="width:28rem;height:2rem"  autoFocus type=""  name="username" [(ngModel)]="model.username"/>
+        <input autoFocus type=""  name="username" [(ngModel)]="model.username"/>
       </div>
       <br />
       <div size="lg" controlId="password">
         <label>Password</label>
-        <input style="width: 28rem; height: 2rem" type="{{ showPassword ? 'text' : 'password' }}" name="password" [(ngModel)]="model.password" />
+        <input type="{{ showPassword ? 'text' : 'password' }}" name="password" [(ngModel)]="model.password" />
       </div>
       <br/>
       <div style="display:flex;">
-      <input type="checkbox" (change)="show()"/>
-      <label style="margin-left: 5px;margin-top: 6px;">Show Password</label>
+      <input class="input1" type="checkbox" (change)="show()"/>
+      <label style="margin-left: 1px;margin-top: -4px;">Show Password</label>
     </div>
 
       <br/>
-      <button style="background-color:'green';width:28.5rem;height:2.5rem" block  type="submit"  value="SEND" (click)="scrollToBottom()"> Envoyer </button>
+      <button style="background-color:'green';width:100%;height:2.5rem;border-radius: 6px;" block  type="submit"  value="SEND" (click)="scrollToBottom()"> Envoyer </button>
       <div *ngIf="formSubmitted" class="feedback success"><span class="checkmark">&#10003;</span>
         &nbsp;&nbsp;Données enregistrées 
       </div>

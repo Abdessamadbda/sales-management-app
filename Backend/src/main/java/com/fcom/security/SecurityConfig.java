@@ -21,6 +21,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.Arrays;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -34,7 +35,6 @@ public class SecurityConfig {
         this.authEntryPoint = authEntryPoint;
     }
 
-    
     public JWTAuthenticationFilter jwtAuthenticationFilter() {
         return new JWTAuthenticationFilter();
     }
@@ -43,7 +43,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
-                .cors().configurationSource(corsConfigurationSource()) 
+                .cors().configurationSource(corsConfigurationSource())
                 .and()
                 .exceptionHandling()
                 .authenticationEntryPoint(authEntryPoint)
@@ -52,19 +52,27 @@ public class SecurityConfig {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .requestMatchers(HttpMethod.POST,"/seller/login").permitAll() 
-                .requestMatchers(HttpMethod.POST,"/admin/alogin").permitAll()
-                .requestMatchers(HttpMethod.POST,"/seller/declaration").permitAll() 
-                .requestMatchers(HttpMethod.POST,"/user/save").permitAll() 
-                .requestMatchers(HttpMethod.GET,"/admin/sellers").permitAll() 
-                .requestMatchers(HttpMethod.GET,"/seller/sellers/**").permitAll() 
-                .requestMatchers(HttpMethod.GET,"/report/**").permitAll() 
-                .requestMatchers(HttpMethod.GET,"/admin/states").permitAll() 
-                .requestMatchers(HttpMethod.GET,"/today/**").permitAll() 
-                .requestMatchers(HttpMethod.GET,"/generate-sales-report/**").permitAll() 
-                .requestMatchers(HttpMethod.GET,"/sales-report").permitAll() 
-                .requestMatchers(HttpMethod.POST,"/seller/sales/update").permitAll() 
-                .requestMatchers(HttpMethod.DELETE,"/seller/declaration/**").permitAll() 
+                .requestMatchers(HttpMethod.POST, "/seller/login").permitAll()
+                .requestMatchers(HttpMethod.POST, "/admin/alogin").permitAll()
+                .requestMatchers(HttpMethod.POST, "/seller/declaration").permitAll()
+                .requestMatchers(HttpMethod.POST, "/seller/recharge").permitAll()
+                .requestMatchers(HttpMethod.POST, "/seller/tpe").permitAll()
+                .requestMatchers(HttpMethod.POST, "/user/save").permitAll()
+                .requestMatchers(HttpMethod.GET, "/admin/sellers").permitAll()
+                .requestMatchers(HttpMethod.GET, "/seller/sellers/**").permitAll()
+                .requestMatchers(HttpMethod.GET, "/report/**").permitAll()
+                .requestMatchers(HttpMethod.GET, "/admin/states").permitAll()
+                .requestMatchers(HttpMethod.GET, "/today/**").permitAll()
+                .requestMatchers(HttpMethod.GET, "/aujour/**").permitAll()
+                .requestMatchers(HttpMethod.GET, "/recharge/**").permitAll()
+                .requestMatchers(HttpMethod.GET, "/tpe/**").permitAll()
+                .requestMatchers(HttpMethod.GET, "/aujour1/**").permitAll()
+                .requestMatchers(HttpMethod.GET, "/generate-sales-report/**").permitAll()
+                .requestMatchers(HttpMethod.GET, "/sales-report").permitAll()
+                .requestMatchers(HttpMethod.POST, "/seller/sales/update").permitAll()
+                .requestMatchers(HttpMethod.POST, "/seller/recharge/update").permitAll()
+                .requestMatchers(HttpMethod.POST, "/seller/tpe/update").permitAll()
+                .requestMatchers(HttpMethod.DELETE, "/seller/declaration/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
@@ -73,7 +81,8 @@ public class SecurityConfig {
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
+            throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
@@ -85,14 +94,13 @@ public class SecurityConfig {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200")); 
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
-        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "X-Requested-With", "Accept", "Origin"));
+        configuration.setAllowedHeaders(
+                Arrays.asList("Authorization", "Content-Type", "X-Requested-With", "Accept", "Origin"));
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
 }
-
-

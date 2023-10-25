@@ -1,4 +1,5 @@
 package com.fcom.controller;
+
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -26,17 +27,19 @@ import com.fcom.service.SalesService;
 import com.fcom.service.UserService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 @Configuration
 public class UserController {
-	@Autowired
-		private final UserRepository userRepository;
-	@Autowired
-	private UserService userservice;
-	@Autowired
-    private  JWTGenerator jwtGenerator;
-	@PostMapping("/seller/login")
+    @Autowired
+    private final UserRepository userRepository;
+    @Autowired
+    private UserService userservice;
+    @Autowired
+    private JWTGenerator jwtGenerator;
+
+    @PostMapping("/seller/login")
     public ResponseEntity<UserLoginResponse> authLogin(@RequestBody LoginRequest loginRequest) {
         String username = loginRequest.getUsername();
         String password = loginRequest.getPassword();
@@ -45,14 +48,16 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new UserLoginResponse(null, null));
         }
 
-        String token = jwtGenerator.generateToken(user.getUsername(), "user"); 
-        UserDTO userDTO = new UserDTO(user.getId(), user.getUsername(), user.getNom_complet(), user.getVille(), user.getPhone());
-        return ResponseEntity.ok(new UserLoginResponse(userDTO, token));    }
+        String token = jwtGenerator.generateToken(user.getUsername(), "user");
+        UserDTO userDTO = new UserDTO(user.getId(), user.getUsername(), user.getNom_complet(), user.getVille(),
+                user.getPhone(), user.getAgence());
+        return ResponseEntity.ok(new UserLoginResponse(userDTO, token));
+    }
 
     private UserDTO createUserDTO(user user) {
-        return new UserDTO(user.getId(), user.getUsername(), user.getNom_complet(), user.getVille(), user.getPhone());
+        return new UserDTO(user.getId(), user.getUsername(), user.getNom_complet(), user.getVille(), user.getPhone(),
+                user.getAgence());
     }
-	
 
     public class UserLoginResponse {
         private UserDTO user;
@@ -79,13 +84,14 @@ public class UserController {
             this.token = token;
         }
     }
-	private final UserService userService;
+
+    private final UserService userService;
 
     @Autowired
-    public UserController(UserService userService,UserRepository userRepository) {
+    public UserController(UserService userService, UserRepository userRepository) {
         this.userService = userService;
         this.jwtGenerator = jwtGenerator;
-        this.userRepository=userRepository;
+        this.userRepository = userRepository;
     }
 
     @PostMapping("/user/save")
@@ -97,27 +103,28 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+
     @GetMapping("/admin/sellers")
     public List<user> getAllSales() {
         return userRepository.findAll();
     }
+
     @GetMapping("/seller/sellers/{sellerId}")
     public List<user> getSalesByVille(@PathVariable Long sellerId) {
-   	 user seller = userService.getSellerInfo(sellerId);
-        List<user> listUsers = userRepository.findByVille(seller.getVille());
+        user seller = userService.getSellerInfo(sellerId);
+        List<user> listUsers = userRepository.findByAgence(seller.getAgence());
         Iterator<user> iterator = listUsers.iterator();
-        
+
         while (iterator.hasNext()) {
             user user = iterator.next();
             String user1 = (user.getNom_complet() != null) ? String.valueOf(user.getNom_complet()) : "";
-            
+
             if (user1.equals(seller.getNom_complet())) {
                 iterator.remove();
             }
         }
-        
+
         return listUsers;
     }
 
-    
 }

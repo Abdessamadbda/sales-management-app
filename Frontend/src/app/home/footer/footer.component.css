@@ -145,4 +145,18 @@
     font-family: Fasthand;
   }
   
-  
+  @media (max-width: 768px) {
+    .footer-container{
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+    }
+    .footer-link-wrapper {
+      flex-direction: row;
+      justify-content: space-between;
+      margin: 0 10px; 
+    }
+    .footer-links{
+      display: none;
+    }
+  }

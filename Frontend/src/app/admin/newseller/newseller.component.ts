@@ -14,10 +14,13 @@ export class NewsellerComponent {
   model: any = {
     nom_complet: '',
     ville: '',
+    agence:'',
     username: '',
     password: '',
     phone:''
   };
+  showNumericValidationMessage: boolean=false;
+  showLengthValidationMessage: boolean=false;
 
   constructor(private http: HttpClient) {}
   
@@ -32,6 +35,8 @@ export class NewsellerComponent {
         username: this.model.username,
         password: this.model.password,
         phone: this.model.phone,
+        agence: this.model.agence,
+
       };
 
       this.http.post('http://localhost:8080/user/save', user).subscribe(
@@ -60,6 +65,7 @@ export class NewsellerComponent {
     return (
       this.model.nom_complet.trim() !== '' &&
       this.model.ville.trim() !== '' &&
+      this.model.agence.trim() !== '' &&
       this.model.username.trim() !== '' &&
       this.model.password.trim() !== '' &&
       this.model.phone.trim() !== ''
@@ -69,6 +75,7 @@ export class NewsellerComponent {
     this.model = {
       nom_complet: '',
       ville: '',
+      agence: '',
       username: '',
       password: '',
       phone: '',
@@ -87,5 +94,32 @@ export class NewsellerComponent {
   }
   show(){
     this.showPassword=!this.showPassword;
+  }
+  isNumericInputAllowed() {
+    return !isNaN(Number(this.model.phone))  ;
+  }
+  
+  validateNumericInput(event: any) {
+    if (this.isNumericInputAllowed()) {
+      if (!(event.key.match(/^[0-9]$/) || event.key === 'Backspace' || event.key === ',' || event.key === '.' || event.key === 'Delete' || event.key === 'ArrowLeft' || event.key === 'ArrowRight' ) ) {
+        event.preventDefault();
+        this.showNumericValidationMessage = true; 
+      } else {
+        this.showNumericValidationMessage = false; 
+      }
+      if (this.validatePhoneNumberLength((this.model.phone).toString())) {
+        if (!(  event.key === 'Backspace'   || event.key === 'Delete' || event.key === 'ArrowLeft' || event.key === 'ArrowRight' ) ) {
+          event.preventDefault();
+        }
+        this.showLengthValidationMessage = true; 
+      } else {
+        this.showLengthValidationMessage = false; 
+      }
+    }
+    
+    
+  }
+  validatePhoneNumberLength(phone: string): boolean {
+    return phone.length === 10;
   }
 }

@@ -6,20 +6,21 @@ public class UserDTO {
     private String nom_complet;
     private String ville;
     private String phone;
+    private String agence;
 
     public UserDTO() {
     }
 
-
-    public UserDTO(Long id, String username, String nom_complet, String ville, String phone) {
+    public UserDTO(Long id, String username, String nom_complet, String ville, String phone, String agence) {
         this.id = id;
         this.username = username;
         this.nom_complet = nom_complet;
         this.ville = ville;
         this.phone = phone;
+        this.agence = agence;
+
     }
 
-    
     public Long getId() {
         return id;
     }
@@ -50,6 +51,14 @@ public class UserDTO {
 
     public void setVille(String ville) {
         this.ville = ville;
+    }
+
+    public String getAgence() {
+        return agence;
+    }
+
+    public void setAgence(String agence) {
+        this.agence = agence;
     }
 
     public String getPhone() {

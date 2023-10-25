@@ -31,8 +31,6 @@ export class Sale {
       this.recharge=recharge;
       this.tpe=tpe;
       this.sellerId=sellerId;
-
-      // Initialize the updatedQuantite and updatedPrix properties
       
     }
   }

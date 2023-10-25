@@ -64,3 +64,11 @@ img {
   left: 0;
   z-index: -2;
 }
+
+@media (max-width: 768px) {
+  .hero-container > h1 {
+    color:#000000;
+    font-size: 60px;
+    margin-top: 2rem;
+  }
+}

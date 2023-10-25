@@ -1,8 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, Renderer2 } from '@angular/core';
 import { Sale } from './Sale.component';
+import { Recharge } from './Recharge.component';
+
 import { SalesService } from './sales.service';
 import { AuthService } from '../login/auth.service';
-
+import { RechargeService } from './recharge.service';
+import { Tpe } from './Tpe.component';
+import { TpeService } from './tpe.service';
 
 @Component({
   selector: 'app-update',
@@ -11,26 +15,38 @@ import { AuthService } from '../login/auth.service';
 })
 export class UpdateComponent {
   salesForToday: Sale[] = [];
+  rechargeForToday: Recharge[] = [];
+  tpeForToday: Tpe[] = [];
   model: any[] = [];
+  model1: any[] = [];
+  model2: any[] = [];
   sellerId:number=0;
   updatedNum:string='';
   updatedNom:string='';
+  editedSale: any = {}; 
+  editedRecharge: any = {}; 
+  editedTpe: any = {}; 
+  editedIndex: number=0;
+  editedIndex1: number=0;
+  editedIndex2: number=0;
 
   typeOptions: { value: string; label: string }[] = [] ;
 
-  constructor(private salesService: SalesService,private authenticationService: AuthService){}
+  constructor(private salesService: SalesService,private rechargeService: RechargeService,private tpeService: TpeService,private authenticationService: AuthService,private renderer: Renderer2, private el: ElementRef){}
   ngOnInit(): void {
     this.fetchSalesForToday();
+    this.fetchRechargeForToday();
+    this.fetchTpeForToday();
   }
   
   fetchSalesForToday(): void {
-    this.sellerId=this.authenticationService.getId(),
+    this.sellerId=this.authenticationService.getId();
     this.salesService.getSalesForToday(this.sellerId).subscribe(
       (sales: Sale[]) => {
         this.salesForToday = sales;
         this.model = this.salesForToday.map(sale => ({
-        updatedNom: '',
-        updatedType: '',
+        updatedNom: sale.nom,
+        updatedType: sale.type,
         updatedQuantite: sale.quantite,
         updatedPrix: sale.prix,
         updatedNum:sale.telephone,
@@ -42,8 +58,77 @@ export class UpdateComponent {
         console.error('Error fetching sales for today:', error);
       }
     );
+    
   }
-  
+  fetchRechargeForToday(): void {
+    this.sellerId=this.authenticationService.getId();
+    this.rechargeService.getRechargeForToday(this.sellerId).subscribe(
+      (recharge: Recharge[]) => {
+        this.rechargeForToday = recharge;
+        this.model1 = this.rechargeForToday.map(recharge => ({
+        updatedDepart: recharge.depart,
+        updatedDealer: recharge.dealer,
+        updatedTransfert: recharge.transfert,
+        updatedReste: recharge.reste,
+        updatedResult:recharge.result,
+       
+      }));
+      },
+      (error) => {
+        console.error('Error fetching recharge for today:', error);
+      }
+    );
+  }
+  fetchTpeForToday(): void {
+    this.sellerId=this.authenticationService.getId();
+    this.tpeService.getTpeForToday(this.sellerId).subscribe(
+      (tpe: Tpe[]) => {
+        this.tpeForToday = tpe;
+        this.model2 = this.tpeForToday.map(tpe => ({
+        updatedDepart: tpe.depart,
+        updatedDealer: tpe.dealer,
+        updatedTransfert: tpe.transfert,
+        updatedReste: tpe.reste,
+        updatedActivation: tpe.activation,
+        updatedResult:tpe.result,
+       
+      }));
+      },
+      (error) => {
+        console.error('Error fetching recharge for today:', error);
+      }
+    );
+  }
+  showEditModal(sale: Sale, index: number) {
+    this.editedSale = { ...sale };
+    this.editedIndex = index;
+        const modalElement = this.el.nativeElement.querySelector('#editSaleModal');
+    this.renderer.addClass(modalElement, 'show'); 
+  }
+  showEditModal1(recharge: Recharge, index: number) {
+    this.editedRecharge = { ...recharge };
+    this.editedIndex1 = index;
+    const modal1Element = this.el.nativeElement.querySelector('#editRechargeModal');
+    this.renderer.addClass(modal1Element, 'show'); 
+  }
+  showEditModal2(tpe: Tpe, index: number) {
+    this.editedTpe = { ...tpe };
+    this.editedIndex2 = index;
+    const modal1Element = this.el.nativeElement.querySelector('#editTpeModal');
+    this.renderer.addClass(modal1Element, 'show'); 
+  }
+  cancelEdit() {
+    const modalElement = this.el.nativeElement.querySelector('#editSaleModal');
+        this.renderer.removeClass(modalElement, 'show');
+  }
+  cancelEdit1() {
+    const modalElement = this.el.nativeElement.querySelector('#editRechargeModal');
+        this.renderer.removeClass(modalElement, 'show');
+  }
+  cancelEdit2() {
+    const modalElement = this.el.nativeElement.querySelector('#editTpeModal');
+        this.renderer.removeClass(modalElement, 'show');
+  }
   updateSale(sale: Sale, index: number): void {
     if(!this.shouldDisplayPhoneNumber1(this.model[index].updatedNom)){
       this.model[index].updatedNum=''
@@ -77,12 +162,80 @@ export class UpdateComponent {
       
       sellerId: sale.sellerId
     };
-  
+    
     this.salesService.updateSale(updatedSale).subscribe(
       (response: Sale) => {
         const index = this.salesForToday.findIndex(s => s.id === response.id);
         if (index !== -1) {
           this.salesForToday[index] = response;
+        }
+        alert("modifié")
+      },
+      (error) => {
+        alert("error")
+      }
+    );
+  }
+  updateRecharge(recharge: Recharge, index: number): void {
+      
+      
+    const updatedDepart = this.model1[index].updatedDepart;
+    const updatedDealer = this.model1[index].updatedDealer;
+  const updatedTransfert = this.model1[index].updatedTransfert;
+  const updatedReste = this.model1[index].updatedReste;
+  const updatedResult = this.model1[index].updatedDepart+this.model1[index].updatedDealer-this.model1[index].updatedTransfert-this.model1[index].updatedReste;
+ 
+  
+    const updatedRecharge: Recharge = {
+      id: recharge.id,
+      date: recharge.date,
+      depart: updatedDepart,
+      dealer:updatedDealer,
+      transfert: updatedTransfert, 
+      reste:updatedReste,   
+      result: updatedResult,      
+      sellerId: recharge.sellerId
+    };
+    this.rechargeService.updateRecharge(updatedRecharge).subscribe(
+      (response: Recharge) => {
+        const index = this.rechargeForToday.findIndex(s => s.id === response.id);
+        if (index !== -1) {
+          this.rechargeForToday[index] = response;
+        }
+        alert("modifié")
+      },
+      (error) => {
+        alert("error")
+      }
+    );
+  }
+  updateTpe(tpe: Tpe, index: number): void {
+      
+      
+    const updatedDepart = this.model2[index].updatedDepart;
+    const updatedDealer = this.model2[index].updatedDealer;
+  const updatedTransfert = this.model2[index].updatedTransfert;
+  const updatedReste = this.model2[index].updatedReste;
+  const updatedActivation = this.model2[index].updatedActivation;
+  const updatedResult = this.model2[index].updatedDepart+this.model2[index].updatedDealer-this.model2[index].updatedTransfert-this.model2[index].updatedReste-this.model2[index].updatedActivation;
+ 
+  
+    const updatedTpe: Tpe = {
+      id: tpe.id,
+      date: tpe.date,
+      depart: updatedDepart,
+      dealer:updatedDealer,
+      transfert: updatedTransfert, 
+      reste:updatedReste,  
+      activation:updatedActivation,
+      result: updatedResult,      
+      sellerId: tpe.sellerId
+    };
+    this.tpeService.updateTpe(updatedTpe).subscribe(
+      (response: Tpe) => {
+        const index = this.tpeForToday.findIndex(s => s.id === response.id);
+        if (index !== -1) {
+          this.tpeForToday[index] = response;
         }
         alert("modifié")
       },
@@ -205,6 +358,16 @@ export class UpdateComponent {
     this.updateSale(sale, index);
     this.clearFields();
   }
+  updateAndClear1(recharge: Recharge, index: number): void {
+    
+    this.updateRecharge(recharge, index);
+    this.clearFields();
+  }
+  updateAndClear2(tpe: Tpe, index: number): void {
+    
+    this.updateTpe(tpe, index);
+    this.clearFields();
+  }
   shouldDisplayPhoneNumber(sale: Sale,index:number): boolean {
     const updatedNom = this.model[index].updatedNom;
     if(updatedNom==''){
@@ -281,4 +444,5 @@ shouldDisplayTpeAndRecharge(sale: Sale): boolean{
       );
     }
   }
+  
 }

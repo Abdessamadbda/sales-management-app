@@ -2,6 +2,9 @@ h1{
     margin-top: 5rem;
 text-align: center;
 }
+.div-prin{
+    display: flex;
+}
 .div1{
     height: 17rem;
     width: 20rem;
@@ -50,4 +53,34 @@ text-align: center;
     color:black;
     text-align: center;
     transition: opacity 0.3s;
+  }
+  @media (max-width: 768px) {
+  .div-prin{
+    display: inline;
+}
+.div1{
+    height: 14rem;
+    width: 17rem;
+    border: 1px solid;
+    margin-left: 7rem;
+    margin-top: 6rem;
+    border-radius: 3rem;
+    box-shadow: 10px 5px 5px grey;;
+
+}
+.div2{
+    height: 14rem;
+    width: 17rem;
+    border: 1px solid;
+    margin-left: 7rem;
+    margin-top: 6rem;
+    border-radius: 3rem;
+    box-shadow: 10px 5px 5px grey;;
+    justify-content: center;
+}
+.div1:hover, .div2:hover {
+    width: 18rem;
+    height: 15rem;
+    cursor: pointer;
+  }
   }

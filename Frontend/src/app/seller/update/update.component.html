@@ -1,23 +1,58 @@
+
 <h2 style="margin-left: 8rem;margin-top: 2rem;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Modifier votre état de vente</h2>
-<div style="margin-left: 3rem;margin-top: 2rem;margin-bottom: 2rem;" *ngFor="let sale of salesForToday; let i = index">
-  <div class="sale-item" *ngIf="shouldDisplayTpeAndRecharge(sale)">
-    <p><strong>Produit:</strong> {{ sale.nom }}</p>
-    <p><strong>Type:</strong> {{ sale.type }}</p>
-    <p><strong>Quantité:</strong> {{ sale.quantite }}</p>
-    <p><strong>Prix en DH:</strong> {{ sale.prix }}</p>
-    <p *ngIf="shouldDisplayPhoneNumber(sale,i)"><strong>Numéro de téléphone:</strong> {{ sale.telephone }}</p>
-    <p *ngIf="shouldDisplayIMEI(sale,i)"><strong>IMEI:</strong> {{ sale.imei }}</p>
-    <p *ngIf="shouldDisplayCard(sale,i)"><strong>Avec carte:</strong> {{ sale.card }}</p>
-    <p *ngIf="shouldDisplayPhoneNumber1(model[i].updatedNom)"><strong>Numéro de téléphone:</strong> {{ model[i].updatedNum }}</p>
-    <p *ngIf="shouldDisplayIMEI1(model[i].updatedNom)"><strong>IMEI:</strong> {{ model[i].updatedImei }}</p>
-    <p *ngIf="shouldDisplayCard1(model[i].updatedNom)"><strong>Avec carte:</strong> {{ model[i].updatedCard }}</p>
+<h5 class="modal-title" style="margin-bottom: -1rem;">les ventes</h5>
+<div class="parent" *ngFor="let sale of salesForToday; let i = index" >
+  <table class="table table-bordered" >
+    <thead>
+      <tr >
+        <th>Produit</th>
+        <th>Type</th>
+        <th>Quantité</th>
+        <th>Prix en DH</th>
+        <th *ngIf="shouldDisplayPhoneNumber(sale,i)">Numéro de téléphone</th>
+        <th *ngIf="shouldDisplayIMEI(sale,i)">IMEI</th>
+        <th *ngIf="shouldDisplayCard(sale,i)">Avec carte</th>
+        <th *ngIf="shouldDisplayPhoneNumber1(model[i].updatedNom)">Numéro de téléphone</th>
+        <th *ngIf="shouldDisplayIMEI1(model[i].updatedNom)">IMEI</th>
+        <th *ngIf="shouldDisplayCard1(model[i].updatedNom)">Avec carte</th>
+        <th>Actions</th>
 
-    
-
-    <div class="update-form" *ngIf="shouldDisplayTpeAndRecharge(sale)">
-
-        <label>Nouveau produit:</label>
-        <select [(ngModel)]="model[i].updatedNom" (ngModelChange)="updateTypeOptions(i)" style="margin-left: 10px;" name="updatedNom">
+      </tr>
+    </thead>
+    <tbody>
+      <tr >
+        <td>{{ sale.nom }}</td>
+        <td>{{ sale.type }}</td>
+        <td>{{ sale.quantite }}</td>
+        <td>{{ sale.prix }}</td>
+        <td *ngIf="shouldDisplayPhoneNumber(sale,i)">{{ sale.telephone }}</td>
+        <td *ngIf="shouldDisplayIMEI(sale,i)">{{ sale.imei }}</td>
+        <td *ngIf="shouldDisplayCard(sale,i)">{{ sale.card }}</td>
+        <td *ngIf="shouldDisplayPhoneNumber1(model[i].updatedNom)">{{ model[i].updatedNum }}</td>
+        <td *ngIf="shouldDisplayIMEI1(model[i].updatedNom)">{{ model[i].updatedImei }}</td>
+        <td *ngIf="shouldDisplayCard1(model[i].updatedNom)">{{ model[i].updatedCard }}</td>
+        <td>
+          <img src="../../../assets/images/pencil.png" style="cursor:pointer;margin-left: 10px;" (click)="showEditModal(sale, i)" alt="Modifier" width="20" height="20" title="Modifier">
+          <img src="../../../assets/images/delete.png" style="cursor:pointer;margin-left: 15px;" (click)="removeSale(i)" alt="Supprimer" width="20" height="20" title="Supprimer">
+          
+        </td>
+      </tr>
+    </tbody>
+    <p></p>
+  </table>
+    <div class="modal" id="editSaleModal" tabindex="-1" role="dialog" >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div style="display: flex; justify-content: end;">
+          <button style="justify-content: end; margin-bottom: 1rem;width:30%;    background-color: rgb(255, 147, 147);
+          " type="button" class="close" data-dismiss="modal" (click)="cancelEdit()"> &times; &nbsp;&nbsp;Annuler </button>
+          </div>
+          <div class="modal-header">
+            <h5 class="modal-title" style="margin-top: 0rem;">Modifier la vente</h5>
+          </div>
+          <div  class="modal-body">
+            <label style="margin-left: 10px">Nouveau produit:</label>
+        <select [(ngModel)]="model[editedIndex].updatedNom" (ngModelChange)="updateTypeOptions(i)" class="in"  name="updatedNom">
           <option value=""></option>
           <option value="FORFAIT VOIX">FORFAIT VOIX</option>
           <option value="FORFAIT DATA">FORFAIT DATA</option>
@@ -33,37 +68,167 @@
     
         </select>
         <label style="margin-left: 10px;">Nouveau type:</label>
-        <select [(ngModel)]="model[i].updatedType"  style="margin-left: 10px;" name="updatedType">
+        <select [(ngModel)]="model[editedIndex].updatedType"  class="in"  name="updatedType">
           <option value=""></option>
           <option *ngFor="let option of typeOptions" [value]="option.value">{{ option.label }}</option>
         </select>
-      <label style="margin-left: 15px;" for="updatedQuantite">Nouvelle quantité:</label>
-      <input style="margin-left: 10px;" type="number" id="updatedQuantite" [(ngModel)]="model[i].updatedQuantite" />
-      <label style="margin-left: 15px;" for="updatedPrix">Nouveau Prix:</label>
-      <input style="margin-left: 10px;" type="number" id="updatedPrix" [(ngModel)]="model[i].updatedPrix" />
+      <label style="margin-left: 10px;" for="updatedQuantite">Nouvelle quantité:</label>
+      <input class="in1" type="number" id="updatedQuantite" [(ngModel)]="model[editedIndex].updatedQuantite" />
+      <label style="margin-left: 10px;" for="updatedPrix">Nouveau Prix:</label>
+      <input class="in1" type="number" id="updatedPrix" [(ngModel)]="model[editedIndex].updatedPrix" />
       <br *ngIf="shouldReturnToline(sale,i)">
-      <label *ngIf="shouldDisplayPhoneNumber(sale,i)" style="margin-left: 15px;" for="updatedNum">Nouveau numéro:</label>
-      <input *ngIf="shouldDisplayPhoneNumber(sale,i)" style="margin-left: 10px;" type="string" id="updatedNum" [(ngModel)]="model[i].updatedNum" />
-      <label *ngIf="shouldDisplayIMEI(sale,i)" style="margin-left: 15px;" for="updatedImei">Nouveau imei:</label>
-      <input  *ngIf="shouldDisplayIMEI(sale,i)" style="margin-left: 10px;" type="string" id="updatedImei" [(ngModel)]="model[i].updatedImei" />
-      <label *ngIf="shouldDisplayCard(sale,i)" style="margin-left: 15px;" for="updatedCard">Avec carte: :</label>
-      <select *ngIf="shouldDisplayCard(sale,i)" style="height: 2rem;width: 3rem; margin-left: 10px;" type="string" id="updatedCard" [(ngModel)]="model[i].updatedCard"  >
+      <label *ngIf="shouldDisplayPhoneNumber(sale,i)" style="margin-left: 10px;" for="updatedNum">Nouveau numéro:</label>
+      <input *ngIf="shouldDisplayPhoneNumber(sale,i)" class="in1" type="string" id="updatedNum" [(ngModel)]="model[editedIndex].updatedNum" />
+      <label *ngIf="shouldDisplayIMEI(sale,i)" style="margin-left: 10px;" for="updatedImei">Nouveau imei:</label>
+      <input  *ngIf="shouldDisplayIMEI(sale,i)" class="in1" type="string" id="updatedImei" [(ngModel)]="model[editedIndex].updatedImei" />
+      <label *ngIf="shouldDisplayCard(sale,i)" style="margin-left: 10px;" for="updatedCard">Avec carte: </label>
+      <select *ngIf="shouldDisplayCard(sale,i)" class="in" type="string" id="updatedCard" [(ngModel)]="model[editedIndex].updatedCard"  >
         <option value=""></option>
         <option value="Oui">Oui</option>
         <option value="Non">Non</option>
       </select>
-      <label *ngIf="shouldDisplayPhoneNumber1(model[i].updatedNom)" style="margin-left: 15px;" for="updatedNum">Nouveau numéro:</label>
-      <input *ngIf="shouldDisplayPhoneNumber1(model[i].updatedNom)" style="margin-left: 10px;" type="string" id="updatedNum" [(ngModel)]="model[i].updatedNum" />
-      <label *ngIf="shouldDisplayIMEI1(model[i].updatedNom)" style="margin-left: 15px;" for="updatedImei">Nouveau imei:</label>
-      <input  *ngIf="shouldDisplayIMEI1(model[i].updatedNom)" style="margin-left: 10px;" type="string" id="updatedImei" [(ngModel)]="model[i].updatedImei" />
-      <label *ngIf="shouldDisplayCard1(model[i].updatedNom)" style="margin-left: 15px;" for="updatedCard">Avec carte: :</label>
-      <select *ngIf="shouldDisplayCard1(model[i].updatedNom)" style="height: 2rem;width: 3rem; margin-left: 10px;" type="string" id="updatedCard" [(ngModel)]="model[i].updatedCard"  >
+      <label *ngIf="shouldDisplayPhoneNumber1(model[i].updatedNom)" style="margin-left: 10px;" for="updatedNum">Nouveau numéro:</label>
+      <input *ngIf="shouldDisplayPhoneNumber1(model[i].updatedNom)" class="in1" type="string" id="updatedNum" [(ngModel)]="model[editedIndex].updatedNum" />
+      <label *ngIf="shouldDisplayIMEI1(model[i].updatedNom)" style="margin-left: 10px;" for="updatedImei">Nouveau imei:</label>
+      <input  *ngIf="shouldDisplayIMEI1(model[i].updatedNom)" class="in1" type="string" id="updatedImei" [(ngModel)]="model[editedIndex].updatedImei" />
+      <label *ngIf="shouldDisplayCard1(model[i].updatedNom)" style="margin-left: 10px;" for="updatedCard">Avec carte: </label>
+      <select *ngIf="shouldDisplayCard1(model[i].updatedNom)" class="in" type="string" id="updatedCard" [(ngModel)]="model[editedIndex].updatedCard"  >
         <option value=""></option>
         <option value="Oui">Oui</option>
         <option value="Non">Non</option>
       </select>
-      <button style="margin-left: 15px;" (click)="updateAndClear(sale,i)">Modifier</button>
-      <button style="margin-left: 15px;" (click)="removeSale(i)">Supprimer</button>
-    </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="Iin" class="btn btn-primary" (click)="updateAndClear(sale,i)">Valider</button>
+          </div>
+        </div>
+  </div>
   </div>
 </div>
+
+<h5 class="modal-title" style="margin-top: 2rem;margin-bottom: -1rem;">les soldes recharge</h5>
+<div class="parent" *ngFor="let recharge of rechargeForToday; let j = index" >
+  <table class="table table-bordered" >
+    <thead>
+      <tr >
+        <th>Solde départ</th>
+        <th>Solde dealer</th>
+        <th>Solde transfert</th>
+        <th>Solde reste</th>
+        <th>résultat</th>
+        <th>Actions</th>
+
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr >
+        <td>{{ recharge.depart }}</td>
+        <td>{{ recharge.dealer }}</td>
+        <td>{{ recharge.transfert }}</td>
+        <td>{{ recharge.reste }}</td>
+        <td>{{ recharge.result }}</td>
+        <td>
+          <img src="../../../assets/images/pencil.png" style="cursor:pointer;margin-left: 10px;" (click)="showEditModal1(recharge, j)" alt="Modifier" width="20" height="20" title="Modifier">
+        </td>
+        
+        
+      </tr>
+    </tbody>
+  </table>
+
+    <div class="modal" id="editRechargeModal" tabindex="-1" role="dialog" >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div style="display: flex; justify-content: end;">
+          <button style="justify-content: end; margin-bottom: 1rem;width:30%;    background-color: rgb(255, 147, 147);
+          " type="button" class="close" data-dismiss="modal" (click)="cancelEdit1()"> &times; &nbsp;&nbsp;Annuler </button>
+          </div>
+          <div class="modal-header">
+            <h5 class="modal-title" style="margin-top: 0rem;">Modifier les soldes recharge</h5>
+          </div>
+          <div  class="modal-body">
+      <label style="margin-left: 10px;" for="updatedDepart">Nouveau solde de départ:</label>
+      <input class="in1" type="number" id="updatedDepart" [(ngModel)]="model1[editedIndex1].updatedDepart" />
+      <label style="margin-left: 10px;" for="updatedDealer">Nouveau solde dealer:</label>
+      <input class="in1" type="number" id="updatedDealer" [(ngModel)]="model1[editedIndex1].updatedDealer" />
+      <label style="margin-left: 10px;" for="updatedTransfert">Nouveau solde transfert:</label>
+      <input class="in1" type="number" id="updatedTransfert" [(ngModel)]="model1[editedIndex1].updatedTransfert" />
+      <label style="margin-left: 10px;" for="updatedReste">Nouveau reste:</label>
+      <input class="in1" type="number" id="updatedReste" [(ngModel)]="model1[editedIndex1].updatedReste" />
+      
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="Iin" class="btn btn-primary" (click)="updateAndClear1(recharge,j)">Valider</button>
+        </div>
+      </div>
+    </div>
+  
+
+</div>
+</div>
+<h5 class="modal-title" style="margin-top: 2rem;;margin-bottom: -1rem">les soldes tpe</h5>
+<div class="parent" *ngFor="let tpe of tpeForToday; let j = index" >
+  <table class="table table-bordered" >
+    <thead>
+      <tr >
+        <th>Solde départ</th>
+        <th>Solde dealer</th>
+        <th>Solde transfert</th>
+        <th>Solde activation</th>
+        <th>Solde reste</th>
+        <th>résultat</th>
+        <th>Actions</th>
+
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr >
+        <td>{{ tpe.depart }}</td>
+        <td>{{ tpe.dealer }}</td>
+        <td>{{ tpe.transfert }}</td>
+        <td>{{ tpe.activation }}</td>
+        <td>{{ tpe.reste }}</td>
+        <td>{{ tpe.result }}</td>
+        <td>
+          <img src="../../../assets/images/pencil.png" style="cursor:pointer;margin-left: 10px;" (click)="showEditModal2(tpe, j)" alt="Modifier" width="20" height="20" title="Modifier">      
+        </td>
+        
+        
+      </tr>
+    </tbody>
+  </table>
+    <div class="modal" id="editTpeModal" tabindex="-1" role="dialog" >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div style="display: flex; justify-content: end;">
+          <button style="justify-content: end; margin-bottom: 1rem;width:30%;    background-color: rgb(255, 147, 147);
+          " type="button" class="close" data-dismiss="modal" (click)="cancelEdit2()"> &times; &nbsp;&nbsp;Annuler </button>
+          </div>
+          <div class="modal-header">
+            <h5 class="modal-title" style="margin-top: 0rem;">Modifier les soldes tpe</h5>
+          </div>
+          <div  class="modal-body">
+      <label style="margin-left: 10px;" for="updatedDepart">Nouveau solde de départ:</label>
+      <input class="in1" type="number" id="updatedDepart" [(ngModel)]="model2[editedIndex2].updatedDepart" />
+      <label style="margin-left: 10px;" for="updatedDealer">Nouveau solde dealer:</label>
+      <input class="in1" type="number" id="updatedDealer" [(ngModel)]="model2[editedIndex2].updatedDealer" />
+      <label style="margin-left: 10px;" for="updatedTransfert">Nouveau solde transfert:</label>
+      <input class="in1" type="number" id="updatedTransfert" [(ngModel)]="model2[editedIndex2].updatedTransfert" />
+      <label style="margin-left: 10px;" for="updatedActivation">Nouveau solde activation:</label>
+      <input class="in1" type="number" id="updatedActivation" [(ngModel)]="model2[editedIndex2].updatedActivation" />
+      <label style="margin-left: 10px;" for="updatedReste">Nouveau reste:</label>
+      <input class="in1" type="number" id="updatedReste" [(ngModel)]="model2[editedIndex2].updatedReste" />
+      
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="Iin" class="btn btn-primary" (click)="updateAndClear2(tpe,j)">Valider</button>
+        </div>
+      </div>
+    </div>
+  
+
+</div>
+
+      

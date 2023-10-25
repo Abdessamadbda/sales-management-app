@@ -11,12 +11,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+
 @Entity
 @Table(name = "sales", schema = "fcomuser")
 public class sale {
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	Long id;
 	String date;
 	String nom;
 	String type;
@@ -28,9 +29,10 @@ public class sale {
 	Float recharge;
 	Float tpe;
 	@Column(name = "seller_id")
-    private Long sellerId; 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "seller_id", referencedColumnName = "id", insertable = false, updatable = false) // Match sellerId with the column name in Sale entity
+	private Long sellerId;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "seller_id", referencedColumnName = "id", insertable = false, updatable = false)
 
 	public Long getId() {
 		return id;
@@ -128,7 +130,6 @@ public class sale {
 		this.sellerId = sellerId;
 	}
 
-	
 	public sale(Long id, String date, String nom, String type, Long quantite, Float prix, String telephone, String imei,
 			String card, Float recharge, Float tpe, Long sellerId, user seller) {
 		super();
@@ -155,11 +156,7 @@ public class sale {
 	public String toString() {
 		return "sale [id=" + id + ", date=" + date + ", nom=" + nom + ", type=" + type + ", quantite=" + quantite
 				+ ", prix=" + prix + ", telephone=" + telephone + ", imei=" + imei + ", card=" + card + ", recharge="
-				+ recharge + ", tpe=" + tpe + ", sellerId=" + sellerId  + "]";
+				+ recharge + ", tpe=" + tpe + ", sellerId=" + sellerId + "]";
 	}
 
-	
-	
-	
-	
 }

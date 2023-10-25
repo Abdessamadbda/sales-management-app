@@ -30,10 +30,16 @@
     border-radius: 3rem 3rem 0rem 0rem;
 }
 .p1{
-    margin-top: -0.2rem;
+    margin-top: -0.8rem;
     justify-content: center;
     margin-left: 4rem;
     font-family:fantasy;
+}
+.p2{
+  margin-top: -1rem;
+  justify-content: center;
+  margin-left: 4rem;
+  font-family:sans-serif;
 }
 .div1 img, .div2 img {
     width: 100%;

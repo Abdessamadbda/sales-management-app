@@ -47,14 +47,11 @@ export class AppComponent {
     const currentRoute = this.router.url;
     const queryParams = this.route.snapshot.queryParamMap;
     const sellerQueryParam = queryParams.get('id');
-  
       if (sellerQueryParam !== null) {
         return true; 
       } else {
         return false; 
       }
-    
-  
   }
   isNewsellerSpace(): boolean {
     const currentRoute = this.router.url;

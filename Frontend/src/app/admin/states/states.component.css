@@ -84,8 +84,6 @@ tbody tr:nth-child(even) {
     margin-left: 21.5rem;
     margin-top: 4px;
 border-radius: 10px;
-
-
   }
   .searchInput{
     height: 1.7rem;
@@ -106,4 +104,60 @@ border-radius: 10px;
     width: 1.4rem;
   }
   
+  @media (max-width: 768px) {
+    .searchIcon {
+      position: absolute;
+      top: 50%;
+right: 4rem;
+      transform: translateY(-50%);
+      height: 1.4rem;
+      width: 1.4rem;
+    }
+    
+   
+    .search{
+      display: flex;
+    }
+    .searchbutton{
+      background-color: #ff9100;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      margin-left: 1.5rem;
+      margin-top: 4px;
+  border-radius: 10px;
+    }
+    .searchInput{
+      height: 1.7rem;
+      border-radius: 10px;
+      padding-right: 0rem; 
+      margin: 0;
+      
+      
+    }
+    .reports {
+      padding: 20px;
+      margin-left: 0rem;
+      margin-top: 8rem;
+    }
+    .parent{
+      display: flex;
+      flex-direction: column;
+    }
+   
+    
+    .container {
+      display: flex;
+      flex-direction: column;
+      max-width: 100%;
+      border-radius: 0; 
+    }
   
+    .filters, .reports {
+      margin: 15px;
+    }
+  
+    .filters  {
+      margin: 15px auto;
+    }
+  }

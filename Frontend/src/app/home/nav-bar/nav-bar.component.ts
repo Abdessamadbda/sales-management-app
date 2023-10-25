@@ -8,6 +8,7 @@ import { Router, NavigationEnd } from '@angular/router';
 })
 export class NavBarComponent implements OnInit {
   activeLink!: string;
+  mobileMenuVisible: boolean = false;
 
   constructor(private router: Router) {}
 
@@ -28,6 +29,11 @@ export class NavBarComponent implements OnInit {
   handleLinkClick(link: string): void {
     this.activeLink = link;
     localStorage.setItem('lastClickedLink', link);
+  }
+  
+
+  toggleMobileMenu() {
+    this.mobileMenuVisible = !this.mobileMenuVisible;
   }
 }
 

@@ -6,3 +6,7 @@ button{
     height: 1.3rem;
     cursor: pointer;
 }
+.padd{
+    margin-left: 0rem;
+    padding-right: 7rem;padding-top: 10px;
+}

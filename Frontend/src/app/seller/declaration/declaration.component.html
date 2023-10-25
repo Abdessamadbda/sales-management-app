@@ -1,10 +1,10 @@
 <h1 style="justify-content: center;text-align: center;font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">déclaration de ventes</h1>
 <p style="margin-left: 8rem;">Date: {{ currentDate | date }}</p>
-<div style="display:flex">
+<div class="parent">
 <form (submit)="onSubmit()">
   <div size="lg">
     <label>Produit</label>
-    <select [(ngModel)]="model.nom" (ngModelChange)="updateTypeOptions()" style="width: 28.5rem; height: 2.5rem" name="nom">
+    <select [(ngModel)]="model.nom" (ngModelChange)="updateTypeOptions()" name="nom">
       <option value=""></option>
       <option value="recharge">recharge</option>
       <option value="tpe">tpe</option>
@@ -25,7 +25,7 @@
   <br *ngIf="shouldDisplayTpeAndRecharge()"/>
   <div size="lg" *ngIf="shouldDisplayTpeAndRecharge()">
     <label >Type</label>
-    <select [(ngModel)]="model.type"  style="width: 28.5rem; height: 2.5rem" name="type">
+    <select [(ngModel)]="model.type"  name="type">
       <option value=""></option>
       <option *ngFor="let option of typeOptions" [value]="option.value">{{ option.label }}</option>
     </select>
@@ -35,82 +35,102 @@
   <br *ngIf="shouldDisplayTpeAndRecharge()"/>
     <div size="lg" *ngIf="shouldDisplayTpeAndRecharge()">
         <label>Quantité</label>
-        <input style="width:28rem;height:2rem" name="quantite" [(ngModel)]="model.quantite"/>
+        <input  name="quantite" [(ngModel)]="model.quantite"  (keydown)="validateNumericInput($event,'input1')"/>
+        <div *ngIf="showNumericValidationMessage1" class="validation-message">entrée invalide.</div>
     </div>
     <br *ngIf="shouldDisplayTpeAndRecharge()"/>
     <div size="lg" *ngIf="shouldDisplayTpeAndRecharge()">
         <label>Prix</label>
-        <input style="width:28rem;height:2rem" name="prix" [(ngModel)]="model.prix"/>
+        <input  name="prix" [(ngModel)]="model.prix" (keydown)="validateNumericInput($event,'input2')"/>
+        <div *ngIf="showNumericValidationMessage2" class="validation-message">entrée invalide.</div>
+
     </div>
     <br *ngIf="shouldDisplayPhoneNumber()"/>
     <div size="lg" *ngIf="shouldDisplayPhoneNumber()">
       <label>Numéro de téléphone</label>
-      <input style="width:28rem;height:2rem" name="telephone" [(ngModel)]="model.telephone"/>
+      <input  name="telephone" [(ngModel)]="model.telephone" (keydown)="validateNumericInput($event,'input3')"/>
+      <div *ngIf="showNumericValidationMessage3" class="validation-message">entrée invalide.</div>
+      <div *ngIf="showLengthValidationMessage" class="validation-message1"> Vous avez entré 10 chiffres</div>
     </div>
   <br *ngIf="shouldDisplayIMEI()"/>
   <div size="lg" *ngIf="shouldDisplayIMEI()">
     <label>IMEI</label>
-    <input style="width:28rem;height:2rem" name="imei" [(ngModel)]="model.imei"/>
+    <input  name="imei" [(ngModel)]="model.imei" />
   </div>
   <br *ngIf="shouldDisplayCard()"/>
   <div size="lg" *ngIf="shouldDisplayCard()">
     <label>Avec carte</label>
-    <select [(ngModel)]="model.card"  style="width: 28.5rem; height: 2.5rem" name="card">
+    <select [(ngModel)]="model.card"  name="card">
       <option value=""></option>
       <option value="Oui">Oui</option>
       <option value="Non">Non</option>
     </select>
   </div>
+  
+
   <br *ngIf="shouldDisplayRecharge()"/>
   <div size="lg" *ngIf="shouldDisplayRecharge()">
     <label>Solde de départ</label>
-    <input style="width:28rem;height:2rem" type="number" name="depart1" [(ngModel)]="model.depart1"/>
+    <input type="number" name="depart1" [(ngModel)]="model.depart1" (keydown)="validateNumericInput($event,'input4')"/>
+    <div *ngIf="showNumericValidationMessage4" class="validation-message">entrée invalide.</div>
   </div>
 <br *ngIf="shouldDisplayRecharge()"/>
 <div size="lg" *ngIf="shouldDisplayRecharge()">
   <label>Alimentation dealer</label>
-  <input style="width:28rem;height:2rem" type="number" name="dealer1" [(ngModel)]="model.dealer1"/>
+  <input  type="number" name="dealer1" [(ngModel)]="model.dealer1" (keydown)="validateNumericInput($event,'input5')"/>
+  <div *ngIf="showNumericValidationMessage5" class="validation-message">entrée invalide.</div>
+
 </div>
 <br *ngIf="shouldDisplayRecharge()"/>
 <div size="lg" *ngIf="shouldDisplayRecharge()">
   <label>transfert</label>
-  <input style="width:28rem;height:2rem" type="number" name="transfert1" [(ngModel)]="model.transfert1"/>
+  <input type="number" name="transfert1" [(ngModel)]="model.transfert1" (keydown)="validateNumericInput($event,'input6')"/>
+  <div *ngIf="showNumericValidationMessage6" class="validation-message">entrée invalide.</div>
+
 </div>
 <br *ngIf="shouldDisplayRecharge()"/>
 <div size="lg" *ngIf="shouldDisplayRecharge()">
   <label>reste</label>
-  <input style="width:28rem;height:2rem" type="number" name="reste1" [(ngModel)]="model.reste1"/>
+  <input type="number" name="reste1" [(ngModel)]="model.reste1" (keydown)="validateNumericInput($event,'input7')"/>
+  <div *ngIf="showNumericValidationMessage7" class="validation-message">entrée invalide.</div>
+
 </div>
 
 <br *ngIf="shouldDisplayTpe()"/>
 
 <div size="lg" *ngIf="shouldDisplayTpe()">
   <label>Solde de départ</label>
-  <input style="width:28rem;height:2rem" type="number" name="depart2" [(ngModel)]="model.depart2"/>
+  <input type="number" name="depart2" [(ngModel)]="model.depart2" (keydown)="validateNumericInput($event,'input8')"/>
+  <div *ngIf="showNumericValidationMessage8" class="validation-message">entrée invalide.</div>
 </div>
 <br *ngIf="shouldDisplayTpe()"/>
 <div size="lg" *ngIf="shouldDisplayTpe()">
 <label>Alimentation tpe</label>
-<input style="width:28rem;height:2rem" type="number" name="dealer2" [(ngModel)]="model.dealer2"/>
+<input  type="number" name="dealer2" [(ngModel)]="model.dealer2" (keydown)="validateNumericInput($event,'input9')"/>
+<div *ngIf="showNumericValidationMessage9" class="validation-message">entrée invalide.</div>
+
 </div>
 <br *ngIf="shouldDisplayTpe()"/>
 <div size="lg" *ngIf="shouldDisplayTpe()">
 <label>Tpe activation</label>
-<input style="width:28rem;height:2rem" type="number" name="activation" [(ngModel)]="model.activation"/>
+<input  type="number" name="activation" [(ngModel)]="model.activation" (keydown)="validateNumericInput($event,'input10')"/>
+<div *ngIf="showNumericValidationMessage10" class="validation-message">entrée invalide.</div>
 </div>
 <br *ngIf="shouldDisplayTpe()"/>
 <div size="lg" *ngIf="shouldDisplayTpe()">
 <label>transfert</label>
-<input style="width:28rem;height:2rem" type="number" name="transfert2" [(ngModel)]="model.transfert2"/>
+<input type="number" name="transfert2" [(ngModel)]="model.transfert2" (keydown)="validateNumericInput($event,'input11')"/>
+<div *ngIf="showNumericValidationMessage11" class="validation-message">entrée invalide.</div>
 </div>
 <br *ngIf="shouldDisplayTpe()"/>
 
 <div size="lg" *ngIf="shouldDisplayTpe()">
   <label>reste</label>
-  <input style="width:28rem;height:2rem" type="number" name="reste2" [(ngModel)]="model.reste2"/>
+  <input type="number" name="reste2" [(ngModel)]="model.reste2" (keydown)="validateNumericInput($event,'input12')"/>
+  <div *ngIf="showNumericValidationMessage12" class="validation-message">entrée invalide.</div>
   </div>
   <br>
-    <button style="background-color:'green';width:28.5rem;height:2.5rem" block  type="submit"  value="SEND" (click)="updateModelValues()"> Déclarer </button>
+    <button style="background-color:'green';width:100%;height:2.5rem;border-radius: 6px;" block  type="submit"  value="SEND" (click)="updateModelValues()"> Déclarer </button>
     <div *ngIf="formSubmitted" class="feedback success"><span class="checkmark">&#10003;</span>
         &nbsp;&nbsp;Vente enregistrée 
       </div>
@@ -127,8 +147,8 @@
       </div>
 </form>
 <div class="div0">
-<button class='bt1' style="background-color:'green';width:28.5rem;height:2.5rem" block  (click)="update()" ><strong>Modifier</strong>  </button>
-<button class='bt2' style="background-color:'green';width:28.5rem;height:2.5rem" (click)="generateReport()"><strong>Générer l'état de vente</strong></button>
+<button class='bt1' style="background-color:'green';width:100%;height:2.5rem" block  (click)="update()" ><strong>Modifier</strong>  </button>
+<button class='bt2' style="background-color:'green';width:100%;height:2.5rem" (click)="generateReport()"><strong>Générer l'état de vente</strong></button>
 </div>
 
 </div>

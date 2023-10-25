@@ -3,24 +3,46 @@
       </head> 
       <head>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Courgette">
-      </head> 
+      </head>
+      <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0/css/bootstrap.min.css">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0/js/bootstrap.min.js"></script>
+    </head> 
+    
+
 <nav class="navbar">
-    <div class="navbar-container">
-      <a routerLink="/" [class.active]="activeLink === 'link1'" class="navbar-logo" (click)="handleLinkClick('link1')">
-        3fcom
-        <i class="fa fa-book" aria-hidden="true"></i>
-      </a>
-  
-      <ul class="nav-menu">
-        <li class="nav-item">
-          <a routerLink="/" class="nav-link" [class.active]="activeLink === 'link1'" (click)="handleLinkClick('link1')">Accueil</a>
-        </li>
-        <li class="nav-item">
-          <a routerLink="/seller/login" class="nav-link" [class.active]="activeLink === 'link2'" (click)="handleLinkClick('link2')">Espace Vendeur</a>
-        </li>
-        <li class="nav-item">
-          <a routerLink="/admin/alogin" class="nav-link" [class.active]="activeLink === 'link3'" (click)="handleLinkClick('link3')">Espace Administrateur</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
+  <div class="navbar-container">
+    <a routerLink="/" [class.active]="activeLink === 'link1'" class="navbar-logo" (click)="handleLinkClick('link1')">
+      3fcom
+    </a>
+    <svg class="menu-icon" (click)="toggleMobileMenu()" style="width: 3rem; height: 3rem;margin-left:3rem;" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" >
+      <path fill-rule="evenodd" d="M3 6.75A.75.75 0 013.75 6h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 6.75zM3 12a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 12zm0 5.25a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75a.75.75 0 01-.75-.75z" clip-rule="evenodd" />
+    </svg>
+    
+
+    <ul class="nav-menu">
+      <li class="nav-item">
+        <a routerLink="/" class="nav-link" [class.active]="activeLink === 'link1'" (click)="handleLinkClick('link1')">Accueil</a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="/seller/login" class="nav-link" [class.active]="activeLink === 'link2'" (click)="handleLinkClick('link2')">Espace Vendeur</a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="/admin/alogin" class="nav-link" [class.active]="activeLink === 'link3'" (click)="handleLinkClick('link3')">Espace Administrateur</a>
+      </li>
+    </ul>
+  </div>
+
+  <ul id="nav-links-mobile" class="nav-links-mobile" [style.display]="mobileMenuVisible ? 'block' : 'none'">
+    <li class="nav-item">
+      <a routerLink="/" class="nav-link" [class.active]="activeLink === 'link1'" (click)="handleLinkClick('link1'); toggleMobileMenu()">Accueil</a>
+    </li>
+    <li class="nav-item">
+      <a routerLink="/seller/login" class="nav-link" [class.active]="activeLink === 'link2'" (click)="handleLinkClick('link2'); toggleMobileMenu()">Espace Vendeur</a>
+    </li>
+    <li class="nav-item">
+      <a routerLink="/admin/alogin" class="nav-link" [class.active]="activeLink === 'link3'" (click)="handleLinkClick('link3'); toggleMobileMenu()">Espace Administrateur</a>
+    </li>
+  </ul>
+</nav>
+

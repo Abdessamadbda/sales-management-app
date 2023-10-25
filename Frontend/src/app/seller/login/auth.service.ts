@@ -25,7 +25,7 @@ export class AuthService {
   getId(): number {
     const sellerIdString = localStorage.getItem(this.ID_KEY);
     if (sellerIdString) {
-      return +sellerIdString; // Convert the string to a number using the '+' operator
+      return +sellerIdString;
     } else {
       return 0; 
     }

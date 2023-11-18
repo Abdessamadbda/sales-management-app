@@ -1,12 +1,15 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-newseller',
   templateUrl: './newseller.component.html',
   styleUrls: ['./newseller.component.css']
 })
+
 export class NewsellerComponent {
+  usernameExistant: boolean=false ;
   formSubmitted: boolean=false ;
   formNonSubmitted: boolean=false ;
   feedbackTimeout: any;
@@ -38,27 +41,46 @@ export class NewsellerComponent {
         agence: this.model.agence,
 
       };
-
-      this.http.post('http://localhost:8080/user/save', user).subscribe(
-        (response) => {
-
-          this.formSubmitted = true;
-          this.clearForm();
-          this.setFeedbackTimeout(4000);
-          setTimeout(() => {
-            this.scrollToBottom();
-          }, 200); 
+      this.http.get<any[]>('http://localhost:8080/admin/sellers').subscribe(
+        (data) => {
+          for(let user1 of data){
+            if(user1.username === this.model.username){
+              this.usernameExistant=true;
+              this.setFeedbackTimeout(4000);
+              setTimeout(() => {
+                this.scrollToBottom();
+              }, 200); 
+            }
+          }
+          
         },
         (error) => {
-          this.formNonSubmitted = true;
-          this.setFeedbackTimeout(4000);
-          setTimeout(() => {
-            this.scrollToBottom();
-          }, 200); 
+          console.error('Error fetching users data:', error);
         }
       );
-    }
+      if(this.usernameExistant){
+        this.http.post('http://localhost:8080/user/save', user).subscribe(
+  (response) => {
+
+    this.formSubmitted = true;
+    this.clearForm();
+    this.setFeedbackTimeout(4000);
+    setTimeout(() => {
+      this.scrollToBottom();
+    }, 200); 
+  },
+  (error) => {
+    this.formNonSubmitted = true;
+    this.setFeedbackTimeout(4000);
+    setTimeout(() => {
+      this.scrollToBottom();
+    }, 200); 
   }
+);
+      }
+    }
+    }
+  
 
   isValid(): boolean {
 
@@ -85,6 +107,7 @@ export class NewsellerComponent {
     clearTimeout(this.feedbackTimeout); 
     this.feedbackTimeout = setTimeout(() => {
       this.formSubmitted = false;
+      this.usernameExistant=false;
       this.formNonSubmitted = false;
 
     }, duration);

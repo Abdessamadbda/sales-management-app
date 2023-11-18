@@ -23,6 +23,7 @@ import java.math.BigInteger;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -137,8 +138,10 @@ public class SalesController {
         List<recharge> rechargeData = rechargeService.getRechargeData();
         List<tpe> tpeData = tpeService.getTpeData();
         LocalDate today = LocalDate.now();
+        LocalDate thirtyDaysAgo = today.minus(30, ChronoUnit.DAYS);
         List<sale> filteredSalesData = salesData.stream()
                 .filter(sale -> !sale.getDate().equals(today.toString()))
+                .filter(sale -> LocalDate.parse(sale.getDate()).isAfter(thirtyDaysAgo))
                 .collect(Collectors.toList());
         if (sellerId != null) {
             filteredSalesData = filteredSalesData.stream()

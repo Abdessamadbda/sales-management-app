@@ -4,7 +4,7 @@
       <div style="display:flex;">
     <div size="lg" >
         <label>Nom & Prénom</label>
-        <input style="width:130%;" [(ngModel)]="model.nom_complet"/>
+        <input style="width:130%;" name="nom_complet" [(ngModel)]="model.nom_complet" />
     </div>
     <br />
     <div size="lg" style="margin-left: 4rem;">
@@ -67,6 +67,9 @@
       </div>
       <div *ngIf="formNonSubmitted" class="feedback error"><span class="cross">&#10005;</span>
         &nbsp;&nbsp;Données non enregistrées 
+      </div>
+      <div *ngIf="usernameExistant" class="feedback error"><span class="cross">&#10005;</span>
+        &nbsp;&nbsp;Nom d'utilisateur déjà existant 
       </div>
    </form>
    <br />

@@ -2,29 +2,37 @@ h2{
     margin-top: 5rem;
 text-align: center;
 }
-.infosDiv{
-    border: 0.4px solid;
-    border-color: black;
-    box-shadow: 10px 10px 10px grey;
-    border-radius: 0%;
-    margin: 4rem 15rem 8rem;
-    padding-top: 19px;
-    padding-left: 19px;
-    padding-bottom: 19px;
-
-}
-.infos{
-    font-family: Arial, sans-serif;
-  font-size: 1rem;
-  font-weight: bold;
-}
-.item{
-    color: rgb(255, 153, 0);
-    font-family: Arial, sans-serif;
-  font-size: 0.9rem;
-  font-weight: bold;
-  margin-left: 3rem;
-}
+.infosDiv {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin: 4rem auto;
+    padding: 20px;
+    max-width: 600px; 
+  }
+  
+  .infos {
+    font-family: 'Arial', sans-serif;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  
+  .item {
+    color: #ff9900;
+    font-family: 'Arial', sans-serif;
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    display: block;
+    flex-basis: 48%; 
+    box-sizing: border-box; 
+  }
+  
+  
 
 
 .btn--outline{
@@ -45,7 +53,47 @@ text-align: center;
     transition: all 0.3s ease-out;
     border: #242424 solid 1px;
 }
+.dashboard-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin: auto;
+  width: 50%;
+  }
+  span{
+    font-size: 1rem;
+    font-weight: bolder;
 
+  }
+  .dashboard-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff; 
+    border: 1px solid #ccc; 
+    padding: 15px;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+  
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+  }
+  
+  .dashboard-button:hover {
+    background-color: #f0f0f0; 
+  }
+  
+  .dashboard-icon {
+    width: 100%;
+    max-width: 50px; 
+    margin-bottom: 10px; 
+  }
+  
+  .dashboard-arrow {
+    width: 100%;
+    max-width: 20px; 
+    margin-top: 10px; 
+  }
+  
 @media (max-width: 768px) {
     
     h2 {

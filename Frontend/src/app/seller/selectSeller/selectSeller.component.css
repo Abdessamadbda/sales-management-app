@@ -1,48 +1,58 @@
-.div1{
-    height: 15rem;
-    width: 17rem;
-    border: 1px solid;
-    margin-left: 20rem;
-    margin-top: 6rem;
-    border-radius: 3rem;
+.seller-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-top: 1rem;
+}
 
+.seller-item {
+  height: 14rem;
+  width: 14rem;
+  border: 2px solid #3498db;
+  border-radius: 1rem;
+  margin: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: box-shadow 0.3s, transform 0.3s;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden; /* Ensure the image stays within the container */
 }
-.div2{
-    height: 15rem;
-    width: 17rem;
-    border: 1px solid;
-    margin-left: 8rem;
-    margin-top: 4rem;
-    border-radius: 3rem;
-    align-items: center;
-    margin-bottom: 1rem;
 
+.seller-item:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
 }
-.div1:hover, .div2:hover {
-    box-shadow:   0.5px 0.5px 0.5px 4px rgb(247, 165, 98);;
 
-    cursor: pointer;
-  }
-  
-.newseller{
-    height: 2px;
-    width: 2px;
-    border-radius: 3rem 3rem 0rem 0rem;
+.seller-item img {
+  width: 50%;
+  height: 70%; /* Adjust the height as needed */
+  object-fit: cover; /* Maintain aspect ratio and cover the container */
+  border-radius: 1rem 1rem 0 0;
 }
-.p1{
-    margin-top: -0.2rem;
-    justify-content: center;
-    margin-left: 4rem;
-    font-family:fantasy;
+
+.seller-name {
+  margin: 1rem;
+  text-align: center;
+  font-family: 'Arial', sans-serif; /* Change the font family */
+  font-size: 1.2rem; /* Change the font size */
+  color: #333; /* Change the text color */
 }
-.div1 img, .div2 img {
+
+.new-seller-indicator {
+  height: 5px;
+  width: 100%;
+  background-color: #3498db;
+  border-radius: 1rem 1rem 0 0;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+/* Adjustments for responsiveness */
+@media (max-width: 768px) {
+  .seller-item {
     width: 100%;
-    height: auto;
   }
-
-  .div1 p, .div2 p {    
-    width: 100%;
-    color:black;
-    margin-left: 4rem;
-    transition: opacity 0.3s;
-  }
+}

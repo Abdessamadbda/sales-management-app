@@ -7,6 +7,8 @@ export class AuthService {
   private readonly NOM_COMPLET_KEY = 'nomComplet';
   private readonly VILLE_KEY = 'ville';
   private readonly PHONE_KEY = 'phone';
+  private readonly AGENCE_KEY = 'agence';
+
   private readonly PASSWORD_KEY = 'password';
   private readonly ID_KEY = 'id';
   setNomComplet(nomComplet: string) {
@@ -46,5 +48,12 @@ export class AuthService {
 
   getPhone(): string {
     return localStorage.getItem(this.PHONE_KEY) || '';
+  }
+  setAgence(agence: string) {
+    localStorage.setItem(this.AGENCE_KEY, agence);
+  }
+
+  getAgence(): string {
+    return localStorage.getItem(this.AGENCE_KEY) || '';
   }
 }

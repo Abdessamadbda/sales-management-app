@@ -12,6 +12,8 @@ export class Profile1Component implements OnInit{
   nomComplet!: string;
   ville!: string;
   phone!:string;
+  agence!:string;
+
   animatedText = '';
   salesReports: any[] = [];
 
@@ -21,6 +23,8 @@ export class Profile1Component implements OnInit{
     this.nomComplet = this.authService.getNomComplet(); 
     this.ville = this.authService.getVille(); 
     this.phone = this.authService.getPhone(); 
+    this.agence = this.authService.getAgence(); 
+
     this.animateName();
 
   }

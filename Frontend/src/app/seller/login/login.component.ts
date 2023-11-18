@@ -33,9 +33,12 @@ export class LoginComponent {
           const nomComplet = user.nom_complet;
           const ville = user.ville;
           const phone = user.phone;
+          const agence = user.agence;
           this.authenticationservice.setToken(token);
           this.authService.setNomComplet(nomComplet);
           this.authService.setPhone(phone);
+          this.authService.setAgence(agence);
+
           this.authService.setVille(ville);
           this.authService.setId(String(id));
 

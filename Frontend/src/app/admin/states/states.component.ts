@@ -9,6 +9,8 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./states.component.css']
 })
 export class StatesComponent implements OnInit {
+  currentPage = 1;
+  itemsPerPage = 6;
   searchQuery: string = '';
   salesReports: any[] = [];
   filteredReports: any[] = [];
@@ -122,5 +124,30 @@ clearFilters(): void {
     this.searchQuery = '';
     this.filterReports();
   }
-  
+  get startIndex(): number {
+    return (this.currentPage - 1) * this.itemsPerPage;
+  }
+
+  get endIndex(): number {
+    return Math.min(this.startIndex + this.itemsPerPage - 1, this.filteredReports.length - 1);
+  }
+
+  get displayedReports(): any[] {
+    return this.filteredReports.slice(this.startIndex, this.endIndex + 1);
+  }
+
+  get totalPages(): number {
+    return Math.ceil(this.filteredReports.length / this.itemsPerPage);
+  }
+  nextPage() {
+    if (this.endIndex < this.filteredReports.length - 1) {
+      this.currentPage++;
+    }
+  }
+
+  previousPage() {
+    if (this.startIndex > 0) {
+      this.currentPage--;
+    }
+  }
 }

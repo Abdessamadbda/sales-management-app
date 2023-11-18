@@ -21,8 +21,8 @@
     <label for="yearSelect">Année:</label>
     <input id="yearSelect" [(ngModel)]="selectedYear">
 <div >
-    <button style="display:block; margin-top: 1rem; margin-left: 5.4rem;border-radius: 5px;" (click)="filterByMonthAndYear(selectedMonth, selectedYear)">Appliquer le filtre</button>
-    <button style="display:block;margin-left: 7rem;border-radius: 5px;background-color:#fab75f;" (click)="clearFilters()">Vider le filtre</button>
+    <button class="button1" style="display:block; margin-top: 1rem; margin-left: 5.4rem;border-radius: 5px;" (click)="filterByMonthAndYear(selectedMonth, selectedYear)">Appliquer le filtre</button>
+    <button class="button1" style="display:block;margin-left: 7rem;border-radius: 5px;background-color:#fab75f;" (click)="clearFilters()">Vider le filtre</button>
   </div>
   </div>
 
@@ -44,12 +44,25 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let report of filteredReports">
+        <tr *ngFor="let report of displayedReports">
           <td class="th1">{{ report.fileName }}</td>
-          <td class="th2"><button (click)="downloadReport(extractDateFromFileName(report.fileName))">Télécharger</button></td>
+          <td class="th2"><button class="button1" (click)="downloadReport(extractDateFromFileName(report.fileName))">Télécharger</button></td>
         </tr>
       </tbody>
     </table>
+    <div style="margin-top: 1rem; display: flex; justify-content: space-between; align-items: center;">
+      <div>
+        <button [disabled]="currentPage === 1" (click)="previousPage()" style="padding: 0.5rem; border-color: #797d80; color: #000000;  border-radius: 4px; cursor: pointer;">Précédent</button>
+      </div>
+      <div>
+        Page {{ currentPage }} of {{ totalPages }}
+      </div>
+      <div>
+        <button [disabled]="currentPage === totalPages" (click)="nextPage()" style="padding: 0.5rem; border-color: #797d80; color: #000000; border-radius: 4px; cursor: pointer;">Suivant</button>
+      </div>
+    </div>
+    
+    
     </div>
   </div>
 </div>

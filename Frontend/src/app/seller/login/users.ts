@@ -5,6 +5,7 @@ export class Users {
   nom_complet!:string;
   ville!:string;
   phone!:string;
+  agence!:string;
 
   
 }

@@ -67,7 +67,7 @@ tbody tr:nth-child(even) {
 
   }
   
-  button {
+  .button1 {
     background-color: #ff9100;
     color: #fff;
     border: none;
@@ -80,6 +80,8 @@ tbody tr:nth-child(even) {
     background-color: #ff9100;
     color: #fff;
     border: none;
+    padding: 5px 10px;
+
     cursor: pointer;
     margin-left: 21.5rem;
     margin-top: 4px;

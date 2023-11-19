@@ -23,6 +23,7 @@ import { SellersComponent } from './admin/sellers/sellers.component';
 import { UpdateComponent } from './seller/update/update.component';
 import { SstatesComponent } from './seller/sstates/sstates.component';
 import { SelectSellerComponent } from './seller/selectSeller/selectSeller.component';
+import { SellersListComponent } from './admin/sellers-list/sellers-list.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { SelectSellerComponent } from './seller/selectSeller/selectSeller.compon
     SellersComponent,
     UpdateComponent,
     SstatesComponent,
-    SelectSellerComponent
+    SelectSellerComponent,
+    SellersListComponent
     
   ],
   imports: [

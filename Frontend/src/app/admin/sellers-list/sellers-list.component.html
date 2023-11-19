@@ -1,0 +1,75 @@
+<h2 style="margin-left: 8rem;margin-top: 2rem;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Modifier les informations des vendeurs</h2>
+<div class="parent">
+  <table class="table table-bordered" >
+    <thead>
+      <tr >
+        <th>Nom et prénom</th>
+        <th>Ville</th>
+        <th>Code agence</th>
+        <th>Téléphone</th>
+        <th >Nom d'utilisateur</th>
+        <th>Mot de passe</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let seller of sellersData; let i = index">
+        <td>{{ seller.nom_complet }}</td>
+        <td>{{ seller.ville }}</td>
+        <td>{{ seller.agence }}</td>
+        <td>{{ seller.phone }}</td>
+        <td>{{ seller.username }}</td>
+        <td>{{ seller.password }}</td>
+        <td>
+          <img src="../../../assets/images/pencil.png" style="cursor:pointer;margin-left: 10px;" (click)="showEditModal(seller, i)" alt="Modifier" width="20" height="20" title="Modifier">
+          <img src="../../../assets/images/delete.png" style="cursor:pointer;margin-left: 15px;" (click)="removeSale(i)" alt="Supprimer" width="20" height="20" title="Supprimer">        
+        </td>       
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="modal" id="editSellerModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div style="display: flex; justify-content: end;">
+          <button style="justify-content: end; margin-bottom: 1rem;width:30%;    background-color: rgb(255, 147, 147);
+          " type="button" class="close" data-dismiss="modal" (click)="cancelEdit()"> &times; &nbsp;&nbsp;Annuler </button>
+          </div>
+          <div class="modal-header">
+            <h5 class="modal-title" style="margin-top: 0rem;">Modifier les informations du vendeur</h5>
+          </div>
+          <div  class="modal-body">
+              <label style="margin-left: 10px;" for="updatedNom">Nouveau nom & prénom:</label>
+      <input class="in1"  id="updatedNom" [(ngModel)]="model[editedIndex].updatedNom" />
+          <label style="margin-left: 10px">Nouvelle ville:</label>
+        <select [(ngModel)]="model[editedIndex].updatedVille"  class="in"  name="updatedVille">
+          <option value=""></option>
+          <option value="Agadir">Agadir</option>
+          <option value="Inezgane">Inezgane</option>
+          <option value="Tantan">Tantan</option>
+          <option value="Casablanca">Casablanca</option>
+          <option value="Rahma">Rahma</option>
+        </select>
+        <label style="margin-left: 10px">Nouveau code agence:</label>
+        <select [(ngModel)]="model[editedIndex].updatedAgence"  class="in"  name="updatedAgence">
+          <option value=""></option>
+          <option value="POS11580">POS11580</option>
+          <option value="POS126372">POS126372</option>
+          <option value="POS15509">POS15509</option>
+          <option value="POS306 RAI">POS306 RAI</option>
+          <option value="POS550 Rahma">POS550 RAHMA</option>
+        </select>
+        <label style="margin-left: 10px;" for="updatedTelephone">Nouveau numéro de téléphone:</label>
+      <input class="in1" id="updatedTelephone" [(ngModel)]="model[editedIndex].updatedTelephone" />
+      <label style="margin-left: 10px;" for="updatedUsername">Nouveau nom d'utilisateur:</label>
+      <input class="in1" id="updatedUsername" [(ngModel)]="model[editedIndex].updatedUsername" />
+      <label style="margin-left: 10px;" for="updatedPassword">Nouveau mot de passe:</label>
+      <input class="in1" id="updatedPassword" [(ngModel)]="model[editedIndex].updatedPassword" />
+     
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="Iin" class="btn btn-primary" (click)="updateAndClear(seller,index)">Valider</button>
+          </div>
+        </div>
+  </div>
+  </div>

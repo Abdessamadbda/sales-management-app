@@ -25,12 +25,13 @@
   transform: translateY(-5px);
 }
 
-.seller-item img {
+.profile{
   width: 50%;
   height: 70%; 
   object-fit: cover; 
   border-radius: 1rem 1rem 0 0;
 }
+
 
 .seller-name {
   margin: 1rem;

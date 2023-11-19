@@ -48,7 +48,36 @@ form {
     cursor: pointer; 
     margin-top: 10px;
   }
-  
+  .custom-link {
+    cursor: pointer;
+    position: center;
+
+  }
+  .custom-link h3{
+    position: absolute;
+    top: 40%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    left: 60%;
+  }
+
+  .custom-link a{
+    text-decoration: none; 
+    color: #007bff; 
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    text-decoration: none;
+  color: #007bff;
+  border: 1px solid #007bff; 
+  padding: 8px 12px; 
+  border-radius: 5px; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+  display: inline-block; 
+  left: 66%;
+ 
+  }
   
    button:hover {
     background-color: #747c85; 

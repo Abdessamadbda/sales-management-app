@@ -3,7 +3,7 @@
 <div class="seller-list">
   <ng-container *ngFor="let user of usersData; let i = index;">
     <div class="seller-item" (click)="divClicked2(user)">
-      <img src="../../assets/images/profile.png" alt="Profile Image">
+      <img class="profile" src="../../assets/images/profile.png" alt="Profile Image">
       <p class="seller-name">{{ user.nom_complet }}</p>
       <p class="p2">{{ user.agence }}</p>
 

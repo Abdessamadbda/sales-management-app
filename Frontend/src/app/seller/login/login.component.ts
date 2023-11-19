@@ -37,9 +37,9 @@ export class LoginComponent {
           this.authenticationservice.setToken(token);
           this.authService.setNomComplet(nomComplet);
           this.authService.setPhone(phone);
-          this.authService.setAgence(agence);
 
           this.authService.setVille(ville);
+          this.authService.setAgence(agence);
           this.authService.setId(String(id));
 
           this.router.navigate(['/seller/profile1']);

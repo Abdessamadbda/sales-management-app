@@ -70,9 +70,11 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.GET, "/generate-sales-report/**").permitAll()
                 .requestMatchers(HttpMethod.GET, "/sales-report").permitAll()
                 .requestMatchers(HttpMethod.POST, "/seller/sales/update").permitAll()
+                .requestMatchers(HttpMethod.POST, "/seller/update").permitAll()
                 .requestMatchers(HttpMethod.POST, "/seller/recharge/update").permitAll()
                 .requestMatchers(HttpMethod.POST, "/seller/tpe/update").permitAll()
                 .requestMatchers(HttpMethod.DELETE, "/seller/declaration/**").permitAll()
+                .requestMatchers(HttpMethod.DELETE, "/seller/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

@@ -13,6 +13,7 @@ import { SellersComponent } from './admin/sellers/sellers.component';
 import { UpdateComponent } from './seller/update/update.component';
 import { SstatesComponent } from './seller/sstates/sstates.component';
 import { SelectSellerComponent } from './seller/selectSeller/selectSeller.component';
+import { SellersListComponent } from './admin/sellers-list/sellers-list.component';
 
 const routes: Routes = [
   { path: 'seller/login', component: LoginComponent },
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'admin/states', component: StatesComponent,canActivate: [AdminAuthGuardService] },
   { path: 'admin/newseller', component: NewsellerComponent,canActivate: [AdminAuthGuardService] },
   { path: 'admin/sellers', component: SellersComponent,canActivate: [AdminAuthGuardService] },
+  { path: 'admin/sellersList', component: SellersListComponent,canActivate: [AdminAuthGuardService] },
 
   { path: 'seller/update', component: UpdateComponent,canActivate: [sellerAuthGuard] },
 

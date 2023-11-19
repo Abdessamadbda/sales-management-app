@@ -113,5 +113,13 @@ if (sellerQueryParam !== null ) {
       return false;
     }
   }
+  isSellersListSpace(): boolean {
+    const currentRoute = this.router.url;
+    if (currentRoute === '/admin/sellersList' ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
 

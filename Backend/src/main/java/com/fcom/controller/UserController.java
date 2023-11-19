@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fcom.model.LoginRequest;
 import com.fcom.model.UserDTO;
+import com.fcom.model.sale;
 import com.fcom.model.user;
 import com.fcom.repository.UserRepository;
 import com.fcom.security.JWTGenerator;
@@ -125,6 +127,26 @@ public class UserController {
         }
 
         return listUsers;
+    }
+
+    @PostMapping("/seller/update")
+    public ResponseEntity<user> updateSale(@RequestBody user user) {
+        user updatedUser = userService.updateUser(user);
+        if (updatedUser != null) {
+            return ResponseEntity.ok(updatedUser);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @DeleteMapping("/seller/{sellerId}")
+    public ResponseEntity<?> deleteUser(@PathVariable Long sellerId) {
+        try {
+            userService.deleteUser(sellerId);
+            return ResponseEntity.noContent().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error deleting user");
+        }
     }
 
 }

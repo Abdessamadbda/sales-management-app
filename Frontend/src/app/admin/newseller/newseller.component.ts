@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-newseller',
@@ -25,7 +26,7 @@ export class NewsellerComponent {
   showNumericValidationMessage: boolean=false;
   showLengthValidationMessage: boolean=false;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router:Router) {}
   
 
 
@@ -144,5 +145,8 @@ export class NewsellerComponent {
   }
   validatePhoneNumberLength(phone: string): boolean {
     return phone.length === 10;
+  }
+  sellersList(){
+    this.router.navigate(['/admin/sellersList']);
   }
 }

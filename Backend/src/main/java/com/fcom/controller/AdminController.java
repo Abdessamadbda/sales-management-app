@@ -24,24 +24,25 @@ import com.fcom.service.UserService;
 @CrossOrigin(origins = "http://localhost:4200")
 @Configuration
 public class AdminController {
-	@Autowired
-	private AdminService adminService;
-	@Autowired
-    private  JWTGenerator jwtGenerator;
-	@PostMapping("/admin/alogin")
+    @Autowired
+    private AdminService adminService;
+    @Autowired
+    private JWTGenerator jwtGenerator;
+
+    @PostMapping("/admin/alogin")
     public ResponseEntity<AdminLoginResponse> authLogin(@RequestBody LoginRequest loginRequest) {
         String username = loginRequest.getUsername();
         String password = loginRequest.getPassword();
-        admin admin =adminService.loginValidation1(username, password);
+        admin admin = adminService.loginValidation1(username, password);
         if (admin == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new AdminLoginResponse(null, null));
         }
 
         String token = jwtGenerator.generateToken(admin.getUsername(), "admin");
-        return ResponseEntity.ok(new AdminLoginResponse(admin, token));    }
+        return ResponseEntity.ok(new AdminLoginResponse(admin, token));
+    }
 
-   
-	    public class AdminLoginResponse {
+    public class AdminLoginResponse {
         private admin admin;
         private String token;
 

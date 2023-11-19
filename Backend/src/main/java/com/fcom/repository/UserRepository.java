@@ -7,7 +7,7 @@ import com.fcom.model.user;
 import java.util.List;
 import java.util.Optional;
 
-public interface UserRepository extends JpaRepository<user, Integer> {
+public interface UserRepository extends JpaRepository<user, Long> {
     Optional<user> findByUsername(String username);
 
     Boolean existsByUsername(String username);
@@ -17,5 +17,7 @@ public interface UserRepository extends JpaRepository<user, Integer> {
     List<user> findByVille(String ville);
 
     List<user> findByAgence(String agence);
+
+    void deleteById(Long userId);
 
 }

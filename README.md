@@ -12,14 +12,11 @@ The Sales Management App is designed to provide an intuitive and efficient platf
 - **Daily Sales Reports:** Sellers can generate daily sales reports at any time.
 - **Seller Reporting:** Administrators can report sellers for necessary actions.
 - **Sales Performance Analysis:** Administrators can view sales reports to analyze the performance of sellers.
-- **Real-time Market Monitoring:** Managers can monitor market trends in real-time.
 
 ## Technologies Used
 
-- **Frontend:** [Flutter](https://flutter.dev/)
-- **Backend:** [Dart](https://dart.dev/)
+- **Frontend:** [Angular]
+- **Backend:** [Spring boot]
 
-## Installation
 
-1. Clone the repository:
 
